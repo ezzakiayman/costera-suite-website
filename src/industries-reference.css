@@ -1,0 +1,53 @@
+.industries-ref{overflow:hidden;background:#fff;color:var(--navy)}
+.industries-ref h1,.industries-ref h2,.industries-ref h3{letter-spacing:0}
+.industries-ref-hero{position:relative;min-height:435px;overflow:hidden;background:#f5f8ff}
+.industries-ref-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
+.industries-ref-hero-inner{position:relative;display:flex;align-items:center;min-height:435px}
+.industries-ref-hero-copy{position:relative;z-index:2;width:52%;padding:34px 0}
+.industries-ref-eyebrow{color:var(--purple);font-size:11px;font-weight:800;letter-spacing:.02em}
+.industries-ref-hero h1{margin-top:13px;font-size:47px;font-weight:800;line-height:1.08}
+.industries-ref-hero h1 em{color:var(--purple);font-style:normal}
+.industries-ref-hero-copy>p{max-width:580px;margin-top:15px;color:#445475;font-size:14px;line-height:1.5}
+.industries-ref-actions{display:flex;align-items:center;gap:24px;margin-top:20px}
+.industries-ref-actions .button{min-height:43px;padding:10px 17px;border-radius:6px;font-size:12px}
+.industries-ref-actions svg{width:15px;height:15px}
+.industries-ref-text-link{display:inline-flex;align-items:center;gap:7px;color:var(--purple);font-size:12px;font-weight:700}
+.industries-ref-assurances{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:640px;margin-top:20px}
+.industries-ref-assurances>div{display:flex;align-items:center;gap:8px;color:#445475;font-size:10px;line-height:1.3}
+.industries-ref-assurances svg{width:36px;height:36px;flex:none;padding:8px;border-radius:50%;background:#eeeaff;color:var(--purple)}
+.industries-ref-hero-note{position:absolute;right:0;top:14%;z-index:2;width:175px;padding:19px 17px;border:1px solid #ffffff88;border-radius:9px;background:#283b69a9;color:#fff;font-size:19px;font-weight:700;line-height:1.25;backdrop-filter:blur(10px)}
+.industries-ref-hero-note span{display:block;margin-top:27px;padding-top:13px;border-top:2px solid #a882ff;font-size:11px;font-weight:500}
+.industries-ref-sectors{padding:29px 0 21px}
+.industries-ref-section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:17px}
+.industries-ref-section-head h2{margin-top:6px;font-size:29px;line-height:1.2}
+.industries-ref-carousel-controls{display:none;gap:7px}
+.industries-ref-carousel-controls button{display:grid;width:36px;height:36px;place-items:center;border:1px solid #e3e6f5;border-radius:50%;background:#fff;color:var(--purple);cursor:pointer}
+.industries-ref-carousel-controls button:hover{background:#efebff}
+.industries-ref-carousel-controls svg{width:16px;height:16px}
+.industries-ref-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.industries-ref-card{display:flex;min-width:0;flex-direction:column;overflow:hidden;border:1px solid #e8ecf5;border-radius:8px;background:#fff;box-shadow:0 7px 25px #25386c0b}
+.industries-ref-card-photo{height:145px;overflow:hidden;background:#eaf0f8}
+.industries-ref-card-photo img{width:100%;height:100%;object-fit:cover}
+.industries-ref-card-body{position:relative;display:flex;flex:1;flex-direction:column;padding:28px 17px 17px}
+.industries-ref-card-icon{position:absolute;top:-29px;left:17px;display:grid;width:53px;height:53px;place-items:center;border:1px solid #e9ebf8;border-radius:50%;background:#fff;color:var(--purple);box-shadow:0 4px 12px #25386c19}
+.industries-ref-card-icon svg{width:27px;height:27px;stroke-width:2}
+.industries-ref-card h3{font-size:16px;line-height:1.25}
+.industries-ref-card-summary{min-height:43px;margin-top:6px;color:#647396;font-size:11px;line-height:1.4}
+.industries-ref-list{margin-top:16px}
+.industries-ref-list h4{display:flex;align-items:center;gap:8px;margin:0;font-size:11px;line-height:1.3}
+.industries-ref-list h4 svg{width:17px;height:17px;flex:none;color:var(--purple)}
+.industries-ref-list-challenge h4 svg{color:#ec358a}
+.industries-ref-list ul{margin:8px 0 0;padding-left:22px;color:#465676;font-size:10px;line-height:1.42}
+.industries-ref-list li+li{margin-top:2px}
+.industries-ref-card-body>a{display:inline-flex;align-items:center;gap:5px;margin-top:auto;padding-top:17px;color:var(--purple);font-size:10px;font-weight:700;line-height:1.3}
+.industries-ref-card-body>a svg{width:13px;height:13px;flex:none}
+.industries-ref-cta{padding:0 0 20px}
+.industries-ref-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px;min-height:115px;padding:20px 36px;border-radius:8px;background:#6038ed;color:#fff}
+.industries-ref-cta-inner>div>span{font-size:11px;font-weight:700;letter-spacing:.03em}
+.industries-ref-cta-inner h2{margin-top:4px;font-size:27px;line-height:1.2}
+.industries-ref-cta-inner p{margin-top:4px;color:#f0ebff;font-size:11px}
+.industries-ref-cta-inner .button{min-height:42px;flex:none;padding:10px 17px;border-radius:6px;background:#fff;color:var(--purple);font-size:11px}
+.industries-ref-cta-inner .button svg{width:15px;height:15px}
+@media(max-width:1100px){.industries-ref-hero-copy{width:57%}.industries-ref-hero h1{font-size:40px}.industries-ref-hero-note{display:none}.industries-ref-carousel-controls{display:flex}.industries-ref-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;padding-bottom:8px}.industries-ref-card{flex:0 0 31%;scroll-snap-align:start}.industries-ref-section-head h2{font-size:25px}}
+@media(max-width:800px){.industries-ref-hero{display:flex;flex-direction:column}.industries-ref-hero-inner{order:1;min-height:0;display:block}.industries-ref-hero-photo{order:2;position:relative;height:280px;object-position:67% 45%}.industries-ref-hero-copy{width:100%;padding:35px 0 24px}.industries-ref-hero h1{font-size:36px}.industries-ref-card{flex-basis:44%}.industries-ref-cta-inner h2{font-size:23px}}
+@media(max-width:600px){.industries-ref-hero h1{font-size:32px}.industries-ref-hero h1 br{display:none}.industries-ref-hero-copy>p{font-size:13px}.industries-ref-actions{align-items:stretch;flex-direction:column;gap:14px}.industries-ref-actions .button{white-space:normal}.industries-ref-assurances{grid-template-columns:1fr 1fr;gap:12px}.industries-ref-section-head{align-items:start}.industries-ref-section-head h2{font-size:22px}.industries-ref-card{flex-basis:min(84%,320px)}.industries-ref-card-photo{height:165px}.industries-ref-card-body{min-height:470px}.industries-ref-cta-inner{align-items:stretch;flex-direction:column;padding:22px}.industries-ref-cta-inner h2{font-size:22px}.industries-ref-cta-inner .button{white-space:normal}}

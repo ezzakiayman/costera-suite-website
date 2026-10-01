@@ -1,0 +1,12 @@
+.chrome-*/
+node_modules/
+dist/
+checks/browser-results.html
+checks/browser-stderr.log
+.vite-runtime/
+.env
+.env.*
+!.env.example
+/*.png
+/assets/
+checks/*results*.json

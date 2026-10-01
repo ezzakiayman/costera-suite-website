@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Costera browser checks</title><style>body{margin:0;font:14px monospace}iframe{display:block;border:0;height:900px}pre{white-space:pre-wrap}</style><iframe src="../index.html" id="page"></iframe><pre id="results">Running browser checks…</pre><script>
+const frame = document.querySelector('#page');
+const output = document.querySelector('#results');
+const results = [];
+function check(name, condition) { results.push({name, passed: Boolean(condition)}); }
+function settle() { return new Promise(resolve => setTimeout(resolve, 100)); }
+frame.addEventListener('load', async () => {
+  try {
+    const doc = frame.contentDocument;
+    const win = frame.contentWindow;
+    await doc.fonts.ready;
+    await Promise.all([...doc.images].map(image => { image.loading = 'eager'; return image.decode().catch(() => {}); }));
+    check('All supplied images load', [...doc.images].every(image => image.complete && image.naturalWidth > 0));
+    check('Local Manrope font loads', doc.fonts.check('800 16px Manrope') && doc.fonts.check('400 16px Manrope'));
+    check('French language and one main heading', doc.documentElement.lang === 'fr' && doc.querySelectorAll('h1').length === 1);
+    for (const width of [320, 390, 600, 768, 1024, 1440, 1920]) {
+      frame.style.width = width + 'px';
+      await settle();
+      check('No horizontal overflow at ' + width + 'px', doc.documentElement.scrollWidth <= doc.documentElement.clientWidth);
+      const button = doc.querySelector('.menu-toggle');
+      if (width < 1000) {
+        button.click();
+        check('Mobile menu opens at ' + width + 'px', button.getAttribute('aria-expanded') === 'true' && win.getComputedStyle(doc.querySelector('.navigation')).display !== 'none');
+        doc.querySelector('.hero-content').click();
+        check('Mobile menu closes at ' + width + 'px', button.getAttribute('aria-expanded') === 'false');
+      }
+      for (const selector of ['.hero-actions .button-primary', '.hero-actions .button-outline']) {
+        const bounds = doc.querySelector(selector).getBoundingClientRect();
+        check('Hero CTA stays inside viewport at ' + width + 'px: ' + selector, bounds.left >= 0 && bounds.right <= doc.documentElement.clientWidth);
+      }
+    }
+    frame.style.width = '1024px';
+    await settle();
+    const navTrigger = doc.querySelector('.nav-trigger');
+    navTrigger.click();
+    check('Solutions dropdown opens', navTrigger.getAttribute('aria-expanded') === 'true' && !doc.querySelector('#solutions-menu').hidden);
+    doc.querySelector('h1').click();
+    check('Solutions dropdown dismisses outside', navTrigger.getAttribute('aria-expanded') === 'false' && doc.querySelector('#solutions-menu').hidden);
+    const dialog = doc.querySelector('dialog');
+    for (const trigger of doc.querySelectorAll('[data-feature]')) {
+      trigger.focus();
+      trigger.click();
+      check('Feature dialog works: ' + trigger.dataset.feature, dialog.open && doc.querySelector('#dialog-title').textContent.trim().length > 0 && doc.querySelectorAll('#dialog-details li').length === 3);
+      doc.querySelector('.dialog-close').click();
+      check('Feature close restores focus: ' + trigger.dataset.feature, !dialog.open && doc.activeElement === trigger);
+    }
+    const trial = doc.querySelector('.hero-actions [data-modal="trial"]');
+    trial.click();
+    check('Trial has an actual contact destination', dialog.open && doc.querySelector('#dialog-action').href.includes('/request-demo?') && doc.querySelector('#dialog-action').href.includes('essai-14-jours'));
+    dialog.close();
+    check('Modal scroll lock clears', !doc.body.classList.contains('dialog-open'));
+    check('Eight feature cards', doc.querySelectorAll('.feature-card').length === 8);
+    check('Every button has an accessible text label', [...doc.querySelectorAll('button')].every(button => button.textContent.trim() || button.getAttribute('aria-label')));
+    check('Internal links resolve', [...doc.querySelectorAll('a[href^="#"]')].every(link => link.hash === '' || link.hash === '#' || doc.getElementById(link.hash.slice(1))));
+  } catch (error) { results.push({name: 'Browser check exception: ' + error.message, passed: false}); }
+  output.textContent = JSON.stringify({passed: results.filter(result => result.passed).length, failed: results.filter(result => !result.passed).length, results}, null, 2);
+  document.title = results.every(result => result.passed) ? 'PASS — Costera browser checks' : 'FAIL — Costera browser checks';
+});
+</script></html>
