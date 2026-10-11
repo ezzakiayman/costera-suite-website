@@ -13,6 +13,7 @@ React/Vite website with connected client-side routes:
 - `/industries` - Industry solutions
 - `/resources` - Searchable resources
 - `/contact` - Contact and demo request
+- `/request-demo` - Personalized demo request form
 
 The header and footer are shared React components. Navigation uses React Router, so moving between the landing and pricing pages does not reload the browser.
 
@@ -27,13 +28,15 @@ Open `http://127.0.0.1:5173/` or `http://127.0.0.1:5173/pricing`.
 
 ## Production build
 
+The live site is mounted at `https://costerasuite.com/home/`. Build it with:
+
 ```powershell
-npm run build
+npm run build:home
 ```
 
-Upload the contents of `dist/` to the website document root. Apache uses the included `.htaccess` fallback. For Nginx, copy the `location` block from `deploy/nginx-spa.conf` into the Costera server block and reload Nginx.
+Upload the contents of `dist/` to the server's `/www/wwwroot/costerasuite.com/home/` directory. Back up the current `index.html` and `assets/` first; copy the new assets, then replace `index.html` last. The deployed Nginx server already uses the `/home/` SPA fallback shown in `deploy/nginx-spa.conf`. For a website mounted at the domain root instead, use `npm run build` and configure a root SPA fallback.
 
-The contact page always displays a form. Without `VITE_CONTACT_ENDPOINT`, submitting opens the visitor's email application with a prepared message to `contact@costerasuite.com`; the visitor must send it. To enable direct submission, set `VITE_CONTACT_ENDPOINT` in a `.env` file before building. The endpoint must accept POST JSON, allow requests from the website origin, and return a 2xx status only after saving or delivering the message. Test delivery end to end before publishing. The Resources page has three searchable articles and a newsletter form. Without `VITE_NEWSLETTER_ENDPOINT`, the form opens an email draft; with it, the endpoint must accept POST JSON containing `email` and return a 2xx status only after storing the subscription.
+The contact and demo request pages display forms. Without `VITE_CONTACT_ENDPOINT`, submitting opens the visitor's email application with a prepared message to `contact@costerasuite.com`; the visitor must send it. To enable direct submission, set `VITE_CONTACT_ENDPOINT` in a `.env` file before building. The endpoint must accept POST JSON, allow requests from the website origin, and return a 2xx status only after saving or delivering the message. Test delivery end to end before publishing. The Resources page has three searchable articles and a newsletter form. Without `VITE_NEWSLETTER_ENDPOINT`, the form opens an email draft; with it, the endpoint must accept POST JSON containing `email` and return a 2xx status only after storing the subscription.
 
 ## Structure
 

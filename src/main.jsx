@@ -16,10 +16,13 @@ import './intelligence-reference.css';
 import './industries-reference.css';
 import './resources-reference.css';
 import './contact-reference.css';
+import './request-demo.css';
+
+const baseName = import.meta.env.BASE_URL === '/' ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '');
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={baseName}>
       <App />
     </BrowserRouter>
   </React.StrictMode>,

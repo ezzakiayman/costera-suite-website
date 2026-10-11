@@ -15,8 +15,7 @@
 .platform-ref-orbit{position:absolute;z-index:2;left:48%;top:50%;width:410px;height:344px;transform:translateY(-50%)}
 .platform-ref-orbit-ring{position:absolute;left:50%;top:50%;width:215px;height:215px;border:1px solid #d9d3ff;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 18px #eeeaff44}
 .platform-ref-orbit-center{position:absolute;left:50%;top:52%;display:flex;width:130px;height:130px;flex-direction:column;align-items:center;justify-content:center;border:1px solid #d4ccff;border-radius:50%;background:#ffffffed;box-shadow:0 9px 34px #4d2cc72b;transform:translate(-50%,-50%);text-align:center}
-.platform-ref-mark{display:grid;width:43px;height:43px;place-items:center;border:4px solid var(--purple);border-right-color:transparent;border-radius:50%;color:var(--purple);font-size:27px;font-weight:800;line-height:1}
-.platform-ref-orbit-center strong{margin-top:5px;font-size:13px}
+.platform-ref-orbit-logo{display:block;width:104px;height:auto;object-fit:contain}
 .platform-ref-orbit-center small{margin-top:2px;color:var(--purple);font-size:8px;font-weight:800;letter-spacing:2px}
 .platform-ref-pillar{position:absolute;display:flex;width:128px;min-height:88px;flex-direction:column;align-items:center;justify-content:center;padding:9px 7px;border:1px solid #dadcf6;border-radius:8px;background:#fffffff0;box-shadow:0 8px 22px #191d6d11;text-align:center}
 .platform-ref-pillar svg{color:var(--purple)}

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, Navigate, NavLink, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ProductPage, ResourceArticlePage } from './SuitePages';
 import CosteraSuitePage from './CosteraSuitePage';
 import GrowthCloudReferencePage from './GrowthCloudReferencePage';
@@ -9,10 +9,12 @@ import IntelligenceReferencePage from './IntelligenceReferencePage';
 import IndustriesReferencePage from './IndustriesReferencePage';
 import ResourcesReferencePage from './ResourcesReferencePage';
 import ContactReferencePage from './ContactReferencePage';
+import RequestDemoPage from './RequestDemoPage';
+import { ASSET_BASE as ASSET } from './assetPath';
 
-const ASSET = '/assets/';
-const DEMO_URL = 'https://costerasuite.com/home/request-demo';
+const DEMO_URL = '/request-demo';
 const CONTACT_URL = 'https://costerasuite.com/home/contact';
+const LOGIN_URL = 'https://costerasuite.com/login';
 
 const featureContent = {
   crm: ['CRM Clients & Prospects', 'Retrouvez vos prospects, clients, contacts et leur historique commercial dans un seul espace.', ['Fiches clients et prospects', 'Contacts et historique des échanges', 'Une information partagée avec votre équipe']],
@@ -37,15 +39,15 @@ const featureCards = [
 ];
 
 const planData = [
-  { id: 'essential', title: 'Essential', subtitle: 'Pour démarrer simplement', monthly: '490', annual: '4 900', users: 'Jusqu’à 3 utilisateurs', features: ['Prospects & Clients', 'Pipeline commercial', 'Activités & Relances', 'Email', 'Propositions & Devis', 'Bons de livraison', 'Factures & Paiements', 'Produits / Services', 'Dashboard standard'], action: 'Essayer gratuitement', url: `${DEMO_URL}?utm_source=pricing&utm_campaign=essential-trial` },
-  { id: 'business', title: 'Business', subtitle: 'Pour structurer et piloter votre équipe', monthly: '890', annual: '8 900', users: 'Jusqu’à 10 utilisateurs', featured: true, features: ['Tout Essential', 'WhatsApp Integration', 'Contrats', 'Objectifs commerciaux', 'Rôles & permissions', 'Champs personnalisés', 'Reporting avancé', 'Facturation récurrente', 'Portail client', 'API Access', 'Configuration personnalisée'], action: 'Demander une démo', url: `${DEMO_URL}?utm_source=pricing&utm_campaign=business-demo` },
+  { id: 'essential', title: 'Essential', subtitle: 'Pour démarrer simplement', monthly: '490', annual: '4 900', users: 'Jusqu’à 3 utilisateurs', features: ['Prospects & Clients', 'Pipeline commercial', 'Activités & Relances', 'Email', 'Propositions & Devis', 'Bons de livraison', 'Factures & Paiements', 'Produits / Services', 'Dashboard standard'], action: 'Essayer gratuitement', url: '/contact' },
+  { id: 'business', title: 'Business', subtitle: 'Pour structurer et piloter votre équipe', monthly: '890', annual: '8 900', users: 'Jusqu’à 10 utilisateurs', featured: true, features: ['Tout Essential', 'WhatsApp Integration', 'Contrats', 'Objectifs commerciaux', 'Rôles & permissions', 'Champs personnalisés', 'Reporting avancé', 'Facturation récurrente', 'Portail client', 'API Access', 'Configuration personnalisée'], action: 'Demander une démo', url: '/request-demo?solution=sales-cloud' },
   { id: 'performance', title: 'Performance', subtitle: 'Pour aller plus loin avec Costera', monthly: '1 490', annual: '14 900', users: 'Jusqu’à 25 utilisateurs', features: ['Tout Business', 'Configuration avancée', 'Dashboards personnalisés', 'KPI spécifiques', 'Segmentation avancée', 'Workflows commerciaux', 'Accompagnement renforcé', 'Intégrations spécifiques', 'Support prioritaire'], action: 'Parler à un expert', url: `${CONTACT_URL}?utm_source=pricing&utm_campaign=performance` },
 ];
 
 function ScrollManager() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
-    const titles = { '/pricing': 'Tarifs Costera', '/costera-suite': 'Costera Suite', '/platform': 'Costera Suite', '/solutions': 'Costera Suite', '/solutions/growth-cloud': 'Growth Cloud', '/solutions/sales-cloud': 'Sales Cloud', '/solutions/revenue-performance': 'Revenue Performance Cloud', '/costera-intelligence': 'Costera Intelligence', '/industries': 'Industries Costera', '/resources': 'Ressources Costera', '/contact': 'Contact Costera' };
+    const titles = { '/pricing': 'Tarifs Costera', '/costera-suite': 'Costera Suite', '/platform': 'Costera Suite', '/solutions': 'Costera Suite', '/solutions/growth-cloud': 'Growth Cloud', '/solutions/sales-cloud': 'Sales Cloud', '/solutions/revenue-performance': 'Revenue Performance Cloud', '/costera-intelligence': 'Costera Intelligence', '/industries': 'Industries Costera', '/resources': 'Ressources Costera', '/contact': 'Contact Costera', '/request-demo': 'Demander une démo Costera' };
     document.title = `${titles[pathname] || (pathname.startsWith('/resources/') ? 'Guide Costera' : 'Costera')} - Costera Suite`;
     document.body.classList.toggle('pricing-page', pathname === '/pricing');
     if (hash) requestAnimationFrame(() => document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView({ behavior: 'smooth' }));
@@ -54,7 +56,7 @@ function ScrollManager() {
   return null;
 }
 
-function Header({ onTrial, onLogin }) {
+function Header({ onTrial }) {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdown, setDropdown] = useState(null);
@@ -99,7 +101,7 @@ function Header({ onTrial, onLogin }) {
           <NavLink className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`} to="/pricing" onClick={closeMenu}>Tarifs</NavLink>
           <NavLink className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`} to="/contact" onClick={closeMenu}>Contact</NavLink>
         </div>
-        <div className="nav-actions"><button className="login-link" onClick={() => { closeMenu(); onLogin(); }}>Se connecter</button><button className="button button-primary button-small" onClick={() => { closeMenu(); onTrial(); }}>Essayer gratuitement</button></div>
+        <div className="nav-actions"><a className="login-link" href={LOGIN_URL} onClick={closeMenu}>Se connecter</a><button className="button button-primary button-small" onClick={() => { closeMenu(); onTrial(); }}>Essayer gratuitement</button></div>
       </nav>
     </div>
   </header>;
@@ -117,19 +119,19 @@ function Footer({ onTrial }) {
     <div className="footer-brand"><Link className="brand" to="/" aria-label="Costera, accueil"><span className="brand-logo"><img src={`${ASSET}brand-guide.png`} width="1672" height="941" alt="Costera Suite" /></span></Link><p>Une solution simple et puissante pour<br />centraliser, piloter et faire grandir votre<br />activité commerciale.</p><strong>Grow Smarter. Operate Better.</strong><small>© {new Date().getFullYear()} Costera. Tous droits réservés.</small></div>
     <div className="footer-column"><strong>Produit</strong><Link to="/costera-suite">Costera Suite</Link><Link to="/pricing">Tarifs</Link><Link to="/costera-intelligence">Costera Intelligence</Link></div>
     <div className="footer-column"><strong>Ressources</strong><Link to="/resources">Centre de ressources</Link><Link to="/industries">Industries</Link><Link to="/solutions/sales-cloud">Sales Cloud</Link><Link to="/solutions/growth-cloud">Growth Cloud</Link></div>
-    <div className="footer-column"><strong>Entreprise</strong><Link to="/industries">Industries</Link><Link to="/solutions/revenue-performance">Revenue Performance</Link><Link to="/contact">Contact</Link><Link to="/contact?subject=demo#contact-form">Demander une démo</Link></div>
-    <div className="footer-cta"><h3>Prêt à simplifier votre<br />gestion commerciale ?</h3><button className="button button-primary button-small" onClick={onTrial}>Essayer gratuitement 14 jours <span aria-hidden="true">→</span></button><a className="footer-demo" href={DEMO_URL}>Demander une démo</a><p>Sans engagement</p></div>
+    <div className="footer-column"><strong>Entreprise</strong><Link to="/industries">Industries</Link><Link to="/solutions/revenue-performance">Revenue Performance</Link><Link to="/contact">Contact</Link><Link to="/request-demo">Demander une démo</Link></div>
+    <div className="footer-cta"><h3>Prêt à simplifier votre<br />gestion commerciale ?</h3><button className="button button-primary button-small" onClick={onTrial}>Essayer gratuitement 14 jours <span aria-hidden="true">→</span></button><Link className="footer-demo" to={DEMO_URL}>Demander une démo</Link><p>Sans engagement</p></div>
   </div></footer>;
 }
 
 function App() {
   const [dialog, setDialog] = useState(null);
-  const trial = () => setDialog({ title: 'Commencez avec Costera', body: 'Contactez notre équipe pour organiser votre essai de 14 jours et définir un environnement adapté à votre activité.', items: ['Configuration de votre entreprise', 'Accompagnement au démarrage', 'Découverte de votre gestion commerciale'], label: 'Demander mon essai', url: `${DEMO_URL}?utm_source=gestion-commerciale&utm_campaign=essai-14-jours` });
-  const login = () => setDialog({ title: 'Votre espace Costera', body: 'Vous êtes déjà client ? Utilisez le lien d’accès communiqué lors de votre configuration. Notre équipe peut vous aider à retrouver votre espace.', items: [], label: 'Contacter le support', url: CONTACT_URL });
+  const navigate = useNavigate();
+  const trial = () => navigate('/contact');
   return <>
     <ScrollManager />
     <a className="skip-link" href="#main">Aller au contenu</a>
-    <Header onTrial={trial} onLogin={login} />
+    <Header onTrial={trial} />
     <Routes>
       <Route path="/" element={<HomePage onTrial={trial} onFeature={(key) => { const [title, body, items] = featureContent[key]; setDialog({ title, body, items, label: 'Découvrir en démo', url: DEMO_URL }); }} />} />
       <Route path="/pricing" element={<PricingPage />} />
@@ -144,6 +146,7 @@ function App() {
       <Route path="/resources" element={<ResourcesReferencePage />} />
       <Route path="/resources/:slug" element={<ResourceArticlePage />} />
       <Route path="/contact" element={<ContactReferencePage />} />
+      <Route path="/request-demo" element={<RequestDemoPage />} />
       <Route path="*" element={<main id="main" className="not-found container"><h1>Page introuvable</h1><p>Cette adresse n’existe pas sur le site Costera.</p><Link className="button button-primary" to="/">Retour à l’accueil</Link></main>} />
     </Routes>
     <Footer onTrial={trial} />
@@ -188,7 +191,7 @@ function HomePage({ onTrial, onFeature }) {
 
   return <main id="main">
     <section className="hero" aria-labelledby="hero-title"><div className="container hero-inner">
-      <div className="hero-content"><div className="product-badge"><span>GESTION COMMERCIALE</span><span>Powered by Costera Sales Cloud</span></div><h1 id="hero-title">Pilotez toute votre<br className="desktop-break" /> activité commerciale<br className="desktop-break" /> depuis <em>une seule<br className="desktop-break" /> plateforme.</em></h1><p className="hero-description">Centralisez vos prospects, clients, opportunités, devis, factures et performances commerciales avec une solution simple, moderne et conçue pour les entreprises en croissance.</p><div className="hero-actions"><button className="button button-primary" onClick={onTrial}>Essayer gratuitement 14 jours <span aria-hidden="true">→</span></button><a className="button button-outline" href={DEMO_URL}>Demander une démo</a></div><ul className="reassurance" aria-label="Les avantages de votre essai"><li><span className="check" aria-hidden="true">✓</span> Sans engagement</li><li><span className="check" aria-hidden="true">✓</span> Configuration rapide</li><li><span className="check" aria-hidden="true">✓</span> Accompagnement inclus</li></ul></div>
+      <div className="hero-content"><div className="product-badge"><span>GESTION COMMERCIALE</span><span>Powered by Costera Sales Cloud</span></div><h1 id="hero-title">Pilotez toute votre<br className="desktop-break" /> activité commerciale<br className="desktop-break" /> depuis <em>une seule<br className="desktop-break" /> plateforme.</em></h1><p className="hero-description">Centralisez vos prospects, clients, opportunités, devis, factures et performances commerciales avec une solution simple, moderne et conçue pour les entreprises en croissance.</p><div className="hero-actions"><button className="button button-primary" onClick={onTrial}>Essayer gratuitement 14 jours <span aria-hidden="true">→</span></button><Link className="button button-outline" to="/request-demo?solution=sales-cloud">Demander une démo</Link></div><ul className="reassurance" aria-label="Les avantages de votre essai"><li><span className="check" aria-hidden="true">✓</span> Sans engagement</li><li><span className="check" aria-hidden="true">✓</span> Configuration rapide</li><li><span className="check" aria-hidden="true">✓</span> Accompagnement inclus</li></ul></div>
       <div className="hero-visual"><img className="dashboard-image" src={`${ASSET}hero-dashboard.png`} width="1672" height="941" alt="Aperçu du tableau de bord Costera" fetchPriority="high" /><div className="handwritten hero-note" aria-hidden="true">Une vision claire.<br />De meilleures décisions.<svg viewBox="0 0 100 110"><path d="M72 5C78 39 57 64 28 85M28 85l5-24M28 85l26-4" /></svg></div></div>
     </div><div className="container trust-strip"><p>Ils nous font confiance</p><div className="customer-logos" role="region" aria-label="Références clients, carrousel animé" tabIndex="0"><div className="customer-logo-track"><CustomerLogoGroup /><CustomerLogoGroup duplicate /></div></div></div></section>
 
@@ -245,14 +248,15 @@ function PricingPage() {
     <section className="pricing-hero" aria-labelledby="pricing-title"><div className="container pricing-intro"><span className="eyebrow">PRICING</span><h1 id="pricing-title">Une offre simple pour digitaliser<br className="desktop-break" /> votre gestion commerciale</h1><p>Choisissez le pack Costera qui correspond à la taille et à la maturité de votre équipe commerciale.</p><div className="billing-control"><div className="billing-toggle" role="group" aria-label="Période de facturation"><button type="button" data-billing="monthly" className={`billing-option${billing === 'monthly' ? ' is-active' : ''}`} aria-pressed={billing === 'monthly'} onClick={() => setBilling('monthly')}>Mensuel</button><button type="button" data-billing="annual" className={`billing-option${billing === 'annual' ? ' is-active' : ''}`} aria-pressed={billing === 'annual'} onClick={() => setBilling('annual')}>Annuel <span>(2 mois offerts)</span></button></div><span className="billing-saving">Économisez 17%</span></div></div>
       <div className="container pricing-grid">{planData.map((plan) => <PricingCard key={plan.id} plan={plan} billing={billing} />)}</div>
     </section>
-    <section className="product-proof" aria-label="Costera en action"><div className="container proof-layout"><figure className="dashboard-showcase"><img src={`${ASSET}pricing-dashboard.png`} width="1920" height="1080" alt="Dashboard Costera présentant le chiffre d’affaires, le pipeline, les devis et les activités récentes" /></figure><blockquote className="pricing-testimonial"><img src={`${ASSET}quote_testimonial.svg`} alt="" aria-hidden="true" /><p>Une solution claire, complète et évolutive pour accompagner notre croissance.</p><footer><strong>Yassine El Alaoui</strong><span>Directeur Général, Atlas Industrie</span></footer></blockquote></div></section>
+    <section className="product-proof" aria-label="Costera en action"><div className="container proof-layout"><figure className="dashboard-showcase"><img src={`${ASSET}costera-dashboard-mad.png`} width="1672" height="941" alt="Dashboard Costera Suite présentant le chiffre d’affaires, le pipeline, les devis et les activités récentes" /></figure><blockquote className="pricing-testimonial"><img src={`${ASSET}quote_testimonial.svg`} alt="" aria-hidden="true" /><p>Une solution claire, complète et évolutive pour accompagner notre croissance.</p><footer><strong>Yassine El Alaoui</strong><span>Directeur Général, Atlas Industrie</span></footer></blockquote></div></section>
     <section className="pricing-benefits" aria-label="Informations complémentaires"><div className="container benefits-strip"><Benefit icon="user_plus.svg" title="+90 MAD" text="par utilisateur supplémentaire / mois" /><Benefit icon="gear_setup.svg" title="Setup & onboarding" text="disponibles" /><Benefit icon="gift_trial.svg" title="Essai gratuit 14 jours" text="sans engagement" /></div></section>
-    <section className="pricing-final"><div className="container final-panel"><div><span className="eyebrow">PRÊT À VOUS LANCER ?</span><h2>Commencez simplement. Évoluez avec Costera.</h2><p>Lancez votre gestion commerciale dès maintenant et activez progressivement d’autres capacités Costera selon l’évolution de votre entreprise.</p></div><div className="final-actions"><div><a className="button button-primary" href={`${DEMO_URL}?utm_source=pricing&utm_campaign=final-trial`}>Essayer 14 jours <span aria-hidden="true">→</span></a><a className="button button-outline" href={`${DEMO_URL}?utm_source=pricing&utm_campaign=final-demo`}>Demander une démo</a></div><strong>Costera — <span>Grow Smarter. Operate Better.</span></strong></div></div></section>
+    <section className="pricing-final"><div className="container final-panel"><div><span className="eyebrow">PRÊT À VOUS LANCER ?</span><h2>Commencez simplement. Évoluez avec Costera.</h2><p>Lancez votre gestion commerciale dès maintenant et activez progressivement d’autres capacités Costera selon l’évolution de votre entreprise.</p></div><div className="final-actions"><div><Link className="button button-primary" to="/contact">Essayer 14 jours <span aria-hidden="true">→</span></Link><Link className="button button-outline" to="/request-demo?solution=sales-cloud">Demander une démo</Link></div><strong>Costera — <span>Grow Smarter. Operate Better.</span></strong></div></div></section>
   </main>;
 }
 
 function PricingCard({ plan, billing }) {
-  return <article className={`pricing-card${plan.featured ? ' pricing-card-featured' : ''}`} aria-labelledby={`${plan.id}-title`}>{plan.featured && <span className="popular-badge">Le plus populaire</span>}<div className="plan-heading"><h2 id={`${plan.id}-title`}>{plan.title}</h2><p>{plan.subtitle}</p></div><div className="plan-price"><strong>{plan[billing]}</strong><span className="currency">MAD</span><small>HT / <span className="price-period">{billing === 'annual' ? 'an' : 'mois'}</span></small></div><p className="plan-users"><img src={`${ASSET}user_plus.svg`} alt="" />{plan.users}</p><ul className="plan-features">{plan.features.map((feature, index) => <li key={feature}>{index === 0 && plan.id !== 'essential' ? <strong>{feature}</strong> : feature}</li>)}</ul><a className={`button ${plan.featured ? 'button-primary' : 'button-outline'} plan-action`} href={plan.url}>{plan.action}</a></article>;
+  const actionClass = `button ${plan.featured ? 'button-primary' : 'button-outline'} plan-action`;
+  return <article className={`pricing-card${plan.featured ? ' pricing-card-featured' : ''}`} aria-labelledby={`${plan.id}-title`}>{plan.featured && <span className="popular-badge">Le plus populaire</span>}<div className="plan-heading"><h2 id={`${plan.id}-title`}>{plan.title}</h2><p>{plan.subtitle}</p></div><div className="plan-price"><strong>{plan[billing]}</strong><span className="currency">MAD</span><small>HT / <span className="price-period">{billing === 'annual' ? 'an' : 'mois'}</span></small></div><p className="plan-users"><img src={`${ASSET}user_plus.svg`} alt="" />{plan.users}</p><ul className="plan-features">{plan.features.map((feature, index) => <li key={feature}>{index === 0 && plan.id !== 'essential' ? <strong>{feature}</strong> : feature}</li>)}</ul>{plan.url.startsWith('/') ? <Link className={actionClass} to={plan.url}>{plan.action}</Link> : <a className={actionClass} href={plan.url}>{plan.action}</a>}</article>;
 }
 
 function Benefit({ icon, title, text }) {
@@ -267,7 +271,7 @@ function InfoDialog({ value, onClose }) {
     if (!value && node?.open) node.close();
     return () => document.body.classList.remove('dialog-open');
   }, [value]);
-  return <dialog ref={ref} aria-labelledby="dialog-title" onClose={onClose} onClick={(event) => { if (event.target === ref.current) onClose(); }}><button className="dialog-close" aria-label="Fermer la fenêtre" type="button" onClick={onClose}>×</button><div className="brand-symbol dialog-mark" aria-hidden="true"><img src={`${ASSET}brand-guide.png`} width="1672" height="941" alt="" /></div><span className="eyebrow">COSTERA GESTION COMMERCIALE</span><h2 id="dialog-title">{value?.title}</h2><p>{value?.body}</p><div>{value?.items?.length > 0 && <ul>{value.items.map((item) => <li key={item}>{item}</li>)}</ul>}</div><a className="button button-primary" href={value?.url || DEMO_URL}>{value?.label || 'Parler à l’équipe Costera'} <span aria-hidden="true">→</span></a></dialog>;
+  return <dialog ref={ref} aria-labelledby="dialog-title" onClose={onClose} onClick={(event) => { if (event.target === ref.current) onClose(); }}><button className="dialog-close" aria-label="Fermer la fenêtre" type="button" onClick={onClose}>×</button><div className="brand-symbol dialog-mark" aria-hidden="true"><img src={`${ASSET}brand-guide.png`} width="1672" height="941" alt="" /></div><span className="eyebrow">COSTERA GESTION COMMERCIALE</span><h2 id="dialog-title">{value?.title}</h2><p>{value?.body}</p><div>{value?.items?.length > 0 && <ul>{value.items.map((item) => <li key={item}>{item}</li>)}</ul>}</div><Link className="button button-primary" to={value?.url || DEMO_URL} onClick={onClose}>{value?.label || 'Parler à l’équipe Costera'} <span aria-hidden="true">→</span></Link></dialog>;
 }
 
 export default App;

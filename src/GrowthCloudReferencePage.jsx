@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ASSET_BASE as ASSET } from './assetPath';
 import {
   ArrowRight,
   BarChart3,
@@ -48,7 +49,7 @@ function MiniTrend({ conversion = false }) {
 }
 
 function JourneyMockup({ type }) {
-  if (type === 'attract') return <div className="growth-ref-mockup growth-ref-mockup-attract" aria-hidden="true"><div><strong>Votre solution<br />pour un monde<br />plus humain.</strong><span className="growth-ref-mockup-button">En savoir</span></div><img src="/assets/costera-leadership-hero.png" alt="" /></div>;
+  if (type === 'attract') return <div className="growth-ref-mockup growth-ref-mockup-attract" aria-hidden="true"><div><strong>Votre solution<br />pour un monde<br />plus humain.</strong><span className="growth-ref-mockup-button">En savoir</span></div><img src={`${ASSET}costera-leadership-hero.png`} alt="" /></div>;
   if (type === 'engage') return <div className="growth-ref-mockup growth-ref-mockup-engage" aria-hidden="true"><strong>Téléchargez notre guide</strong><span /><span /><span className="growth-ref-mockup-button">Recevoir le guide</span></div>;
   if (type === 'qualify') return <div className="growth-ref-mockup growth-ref-mockup-qualify" aria-hidden="true"><div className="growth-ref-lead"><span className="growth-ref-avatar">SM</span><div><strong>Lead qualifié</strong><small>Score 92</small></div></div><dl><div><dt>Secteur</dt><dd>Technologie</dd></div><div><dt>Taille</dt><dd>200–500</dd></div><div><dt>Intérêt</dt><dd>Solution Costera</dd></div></dl></div>;
   if (type === 'nurture') return <div className="growth-ref-mockup growth-ref-mockup-nurture" aria-hidden="true">{[[Mail, 'Email personnalisé'], [CalendarDays, 'Invitation webinar'], [FileText, 'Étude de cas'], [MessageCircle, 'Relance automatique']].map(([Icon, label]) => <span key={label}><Icon aria-hidden="true" />{label}</span>)}</div>;
@@ -59,7 +60,7 @@ export default function GrowthCloudReferencePage() {
   return <main id="main" className="growth-ref">
     <section className="growth-ref-hero" aria-labelledby="growth-ref-title">
       <div className="growth-ref-visual" aria-hidden="true">
-        <img src="/assets/costera-leadership-hero.png" alt="" />
+        <img src={`${ASSET}costera-leadership-hero.png`} alt="" />
         <div className="growth-ref-hero-stat growth-ref-hero-leads"><span>Leads qualifiés</span><strong>+ 320% <TrendingUp /></strong><small>vs. période précédente</small><MiniTrend /></div>
         <div className="growth-ref-stage-list"><span><UserRound /> Attirer</span><span><Megaphone /> Engager</span><span><Target /> Convertir</span><span><BarChart3 /> Développer</span></div>
         <div className="growth-ref-hero-stat growth-ref-hero-pipeline"><span>Opportunités pipeline</span><strong>+ 48% <TrendingUp /></strong><small>vs. période précédente</small><MiniTrend conversion /></div>
@@ -67,7 +68,7 @@ export default function GrowthCloudReferencePage() {
         <div className="growth-ref-hero-quote"><Sparkles />De meilleurs<br />leads pour un<br />plus grand demain.</div>
       </div>
       <div className="container growth-ref-hero-inner">
-        <div className="growth-ref-copy"><span className="eyebrow">TRANSFORMER L’INTÉRÊT EN CROISSANCE</span><h1 id="growth-ref-title">Growth Cloud<sup>™</sup></h1><h2>Plus de leads. Plus d’opportunités.<br />Une croissance durable.</h2><p>Une suite complète pour attirer les bons prospects, engager vos audiences et convertir plus d’opportunités, grâce à la donnée, l’automatisation et l’intelligence artificielle.</p><div className="growth-ref-actions"><Link className="button button-primary" to="/contact?subject=Growth%20Cloud%20demo#contact-form"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link><Link className="button button-outline" to="/contact?subject=Growth%20Cloud#contact-form"><MessageCircle aria-hidden="true" /> Échanger avec un expert</Link></div><ul><li><Check /> Démo personnalisée</li><li><Check /> Conseils d’experts</li><li><Check /> Sans engagement</li></ul></div>
+        <div className="growth-ref-copy"><span className="eyebrow">TRANSFORMER L’INTÉRÊT EN CROISSANCE</span><h1 id="growth-ref-title">Growth Cloud<sup>™</sup></h1><h2>Plus de leads. Plus d’opportunités.<br />Une croissance durable.</h2><p>Une suite complète pour attirer les bons prospects, engager vos audiences et convertir plus d’opportunités, grâce à la donnée, l’automatisation et l’intelligence artificielle.</p><div className="growth-ref-actions"><Link className="button button-primary" to="/request-demo?solution=growth-cloud"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link><Link className="button button-outline" to="/contact?subject=Growth%20Cloud#contact-form"><MessageCircle aria-hidden="true" /> Échanger avec un expert</Link></div><ul><li><Check /> Démo personnalisée</li><li><Check /> Conseils d’experts</li><li><Check /> Sans engagement</li></ul></div>
       </div>
       <div className="container growth-ref-metrics">{metrics.map(({ value, label, change, note, icon: Icon }) => <article key={label}><span className="growth-ref-icon"><Icon aria-hidden="true" /></span><div><strong>{value}</strong><p>{label}</p><b><TrendingUp aria-hidden="true" /> {change}</b><small>{note}</small></div></article>)}</div>
     </section>
@@ -76,7 +77,7 @@ export default function GrowthCloudReferencePage() {
 
     <section className="growth-ref-section growth-ref-journey" id="growth-journey"><div className="container"><div className="growth-ref-heading"><div><span className="eyebrow">DU MARKETING AU REVENU</span><h2>De la campagne au pipeline</h2><p>Un parcours fluide et mesurable pour transformer chaque interaction en opportunité.</p></div><Link to="/resources">Voir plus de cas d’usage <ArrowRight aria-hidden="true" /></Link></div><div className="growth-ref-journey-grid">{journey.map((step, index) => <article className="growth-ref-flow-step" key={step.title}><JourneyMockup type={step.mockup} /><div className="growth-ref-step-copy"><span>{index + 1}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></div></article>)}</div></div></section>
 
-    <section className="growth-ref-cta"><div className="container growth-ref-cta-inner"><div><span>PRÊT À ACCÉLÉRER VOTRE CROISSANCE ?</span><h2>Demandez une démo de Growth Cloud<sup>™</sup></h2><p>Découvrez comment Costera Suite peut vous aider à générer plus de leads, plus d’opportunités et une croissance durable.</p></div><div className="growth-ref-cta-actions"><Link className="button" to="/contact?subject=Growth%20Cloud%20demo#contact-form"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link><Link className="button" to="/contact?subject=Growth%20Cloud#contact-form"><MessageCircle aria-hidden="true" /> Échanger avec un expert</Link></div><div className="growth-ref-cta-note">Construisons<br />votre prochain niveau<br />de croissance.</div></div></section>
+    <section className="growth-ref-cta"><div className="container growth-ref-cta-inner"><div><span>PRÊT À ACCÉLÉRER VOTRE CROISSANCE ?</span><h2>Demandez une démo de Growth Cloud<sup>™</sup></h2><p>Découvrez comment Costera Suite peut vous aider à générer plus de leads, plus d’opportunités et une croissance durable.</p></div><div className="growth-ref-cta-actions"><Link className="button" to="/request-demo?solution=growth-cloud"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link><Link className="button" to="/contact?subject=Growth%20Cloud#contact-form"><MessageCircle aria-hidden="true" /> Échanger avec un expert</Link></div><div className="growth-ref-cta-note">Construisons<br />votre prochain niveau<br />de croissance.</div></div></section>
 
     <section className="growth-ref-trust" aria-label="Ils nous font confiance"><div className="container"><span>VEOLIA</span><span>Auchan</span><span>LEROY MERLIN</span><span>SAINT-GOBAIN</span><span>sonepar</span><span>TotalEnergies</span><span>Capgemini</span><span>BOSCH</span></div></section>
   </main>;

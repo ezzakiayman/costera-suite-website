@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BarChart3, Building2, Settings2, ShoppingBag, ShoppingCart, Target, UsersRound } from 'lucide-react';
+import { ASSET_BASE as ASSET } from './assetPath';
 
 const sectors = [
   {
@@ -43,7 +44,7 @@ export default function IndustriesReferencePage() {
 
   return <main id="main" className="industries-ref">
     <section className="industries-ref-hero" aria-labelledby="industries-title">
-      <img className="industries-ref-hero-photo" src="/assets/costera-intelligence-hero.png" alt="Une professionnelle dans un bureau lumineux" fetchPriority="high" />
+      <img className="industries-ref-hero-photo" src={`${ASSET}costera-intelligence-hero.png`} alt="Une professionnelle dans un bureau lumineux" fetchPriority="high" />
       <div className="container industries-ref-hero-inner"><div className="industries-ref-hero-copy">
         <span className="industries-ref-eyebrow">INDUSTRIES</span>
         <h1 id="industries-title">Des solutions pensées pour vos <em>réalités métier.</em></h1>
@@ -54,7 +55,7 @@ export default function IndustriesReferencePage() {
     </section>
 
     <section className="industries-ref-sectors" id="industries-sectors"><div className="container"><div className="industries-ref-section-head"><div><span className="industries-ref-eyebrow">NOS SECTEURS</span><h2>Des expertises sectorielles pour un impact réel.</h2></div><div className="industries-ref-carousel-controls"><button type="button" onClick={() => scroll(-1)} aria-label="Voir les secteurs précédents"><ArrowLeft aria-hidden="true" /></button><button type="button" onClick={() => scroll(1)} aria-label="Voir les secteurs suivants"><ArrowRight aria-hidden="true" /></button></div></div>
-      <div className="industries-ref-grid" ref={track}>{sectors.map(({ name, short, image, icon: Icon, summary, challenges, approach, results }) => <article className="industries-ref-card" key={name}><div className="industries-ref-card-photo"><img src={`/assets/${image}`} alt="" loading="lazy" /></div><div className="industries-ref-card-body"><span className="industries-ref-card-icon"><Icon aria-hidden="true" /></span><h3>{name}</h3><p className="industries-ref-card-summary">{summary}</p><SectorList title="Défis courants" icon={Target} items={challenges} tone="challenge" /><SectorList title="Notre approche" icon={Settings2} items={approach} tone="approach" /><SectorList title="Résultats attendus" icon={BarChart3} items={results} tone="result" /><Link to={`/contact?subject=${encodeURIComponent(name)}#contact-form`}>Découvrir nos solutions {short} <ArrowRight aria-hidden="true" /></Link></div></article>)}</div>
+      <div className="industries-ref-grid" ref={track}>{sectors.map(({ name, short, image, icon: Icon, summary, challenges, approach, results }) => <article className="industries-ref-card" key={name}><div className="industries-ref-card-photo"><img src={`${ASSET}${image}`} alt="" loading="lazy" /></div><div className="industries-ref-card-body"><span className="industries-ref-card-icon"><Icon aria-hidden="true" /></span><h3>{name}</h3><p className="industries-ref-card-summary">{summary}</p><SectorList title="Défis courants" icon={Target} items={challenges} tone="challenge" /><SectorList title="Notre approche" icon={Settings2} items={approach} tone="approach" /><SectorList title="Résultats attendus" icon={BarChart3} items={results} tone="result" /><Link to={`/contact?subject=${encodeURIComponent(name)}#contact-form`}>Découvrir nos solutions {short} <ArrowRight aria-hidden="true" /></Link></div></article>)}</div>
     </div></section>
 
     <section className="industries-ref-cta"><div className="container industries-ref-cta-inner"><div><span>INDUSTRIES</span><h2>Votre secteur. Nos expertises. Des résultats concrets.</h2><p>Échangez avec nos experts pour découvrir comment Costera Suite peut répondre à vos enjeux métier.</p></div><Link className="button" to="/contact?subject=Industries#contact-form">Parler à un expert <ArrowRight aria-hidden="true" /></Link></div></section>

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { IndustryApproach, PlatformDetails, ProductJourney } from './RecommendationSections';
+import { ASSET_BASE as A } from './assetPath';
 
-const A = '/assets/';
-const DEMO = 'https://costerasuite.com/home/request-demo';
+const DEMO = '/request-demo';
 
 const icons = {
   crm: 'icon_crm_clients_prospects.png',
@@ -36,7 +36,7 @@ const productPages = {
   revenue: {
     eyebrow: 'REVENUE PERFORMANCE CLOUD', title: <>De la donnée à la décision,<br /><em>plus de performance.</em></>,
     description: 'Fixez vos objectifs, anticipez vos résultats, simplifiez vos commissions et donnez à vos équipes une vision fiable de leur performance.',
-    image: 'pricing-dashboard.png', visual: 'dashboard',
+    image: 'costera-dashboard-mad.png', visual: 'dashboard',
     stats: [['Objectifs', 'Priorités partagées'], ['Prévisions', 'Scénarios de revenus'], ['Commissions', 'Calculs structurés'], ['KPI', 'Pilotage continu']],
     features: [['performance', 'Objectifs & KPI', 'Définissez et suivez les objectifs de l’entreprise et des équipes.'], ['dashboard', 'Forecasting avancé', 'Anticipez les résultats avec des modèles et scénarios fiables.'], ['crm', 'Commissions simplifiées', 'Automatisez les calculs et partagez une information transparente.'], ['invoice', 'Tableaux de bord', 'Analysez revenus, tendances, équipes et opportunités.']],
     process: [['1', 'Définir', 'Alignez les objectifs avec votre stratégie.'], ['2', 'Prévoir', 'Projetez les résultats et scénarios.'], ['3', 'Piloter', 'Suivez les écarts en temps réel.'], ['4', 'Optimiser', 'Transformez les données en décisions.']],
@@ -63,7 +63,7 @@ function SectionTitle({ eyebrow, title, text, center = false }) {
 }
 
 function PageHero({ eyebrow, title, description, image = 'costera-leadership-hero.png', visual = 'photo', explore = '#page-details', exploreLabel = 'Voir les fonctionnalités', contactHero = false }) {
-  return <section className={`suite-hero suite-hero-${visual}`}><div className="container suite-hero-layout"><div className="suite-hero-copy"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{description}</p><div className="suite-hero-actions"><a className="button button-primary" href={explore}>{exploreLabel} <span aria-hidden="true">↓</span></a>{contactHero ? <a className="button button-outline" href={DEMO}>Demander une démo</a> : <Link className="button button-outline" to="/contact?subject=demo#contact-form">Demander une démo</Link>}</div><ul className="suite-assurances"><li>Configuration rapide</li><li>Accompagnement expert</li><li>Sans engagement</li></ul></div><div className="suite-hero-media"><img src={`${A}${image}`} alt={visual === 'dashboard' ? 'Aperçu de la plateforme Costera' : 'Une équipe accompagnée par Costera Suite'} />{visual !== 'dashboard' && <div className="suite-floating-panel"><strong>{visual === 'ai' ? 'Une IA intégrée à vos métiers' : 'Une plateforme pour mieux décider'}</strong><span>People · Processes · Data · Technology · AI</span></div>}</div></div></section>;
+  return <section className={`suite-hero suite-hero-${visual}`}><div className="container suite-hero-layout"><div className="suite-hero-copy"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{description}</p><div className="suite-hero-actions"><a className="button button-primary" href={explore}>{exploreLabel} <span aria-hidden="true">↓</span></a><Link className="button button-outline" to={DEMO}>Demander une démo</Link></div><ul className="suite-assurances"><li>Configuration rapide</li><li>Accompagnement expert</li><li>Sans engagement</li></ul></div><div className="suite-hero-media"><img src={`${A}${image}`} alt={visual === 'dashboard' ? 'Aperçu de la plateforme Costera' : 'Une équipe accompagnée par Costera Suite'} />{visual !== 'dashboard' && <div className="suite-floating-panel"><strong>{visual === 'ai' ? 'Une IA intégrée à vos métiers' : 'Une plateforme pour mieux décider'}</strong><span>People · Processes · Data · Technology · AI</span></div>}</div></div></section>;
 }
 
 function MetricStrip({ items }) {
@@ -79,7 +79,7 @@ function Process({ items }) {
 }
 
 function PageCta({ title = 'Construisons votre prochaine étape de croissance.' }) {
-  return <section className="suite-cta"><div className="container suite-cta-inner"><div><span className="eyebrow">PRÊT À PASSER À L’ACTION ?</span><h2>{title}</h2><p>Échangez avec nos experts et découvrez une approche adaptée à vos enjeux.</p></div><div><Link className="button button-primary" to="/contact?subject=demo#contact-form">Demander une démo <span aria-hidden="true">→</span></Link><Link className="button button-outline" to="/pricing">Voir les tarifs</Link></div></div></section>;
+  return <section className="suite-cta"><div className="container suite-cta-inner"><div><span className="eyebrow">PRÊT À PASSER À L’ACTION ?</span><h2>{title}</h2><p>Échangez avec nos experts et découvrez une approche adaptée à vos enjeux.</p></div><div><Link className="button button-primary" to="/request-demo">Demander une démo <span aria-hidden="true">→</span></Link><Link className="button button-outline" to="/pricing">Voir les tarifs</Link></div></div></section>;
 }
 
 export function ProductPage({ type }) {
@@ -129,7 +129,7 @@ export function ContactPage() {
   const [searchParams] = useSearchParams();
   const topic = searchParams.get('subject') || '';
   const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT;
-  return <main id="main" className="suite-page contact-page"><PageHero eyebrow="CONTACT" title={<>Parlons de votre projet<br /><em>de digitalisation.</em></>} description="Nos experts sont à votre écoute pour comprendre vos enjeux et vous accompagner vers une croissance durable." image="executive.png" explore="#contact-form" exploreLabel="Nous contacter" /><section id="contact-form" className="contact-section"><div className="container contact-layout"><ContactForm endpoint={endpoint} topic={topic} /><aside className="contact-aside"><article><span className="suite-icon"><img src={`${A}hero-dashboard.png`} alt="" /></span><h2>Demander une démo</h2><p>Découvrez Costera Suite en action avec un expert métier.</p><ul><li>Présentation personnalisée</li><li>Réponses à vos questions</li><li>Sans engagement</li></ul><Link className="button button-primary" to="/contact?subject=demo#contact-form">Demander une démo</Link></article><article><span className="suite-icon"><img src={`${A}${icons.performance}`} alt="" /></span><h2>Demander un diagnostic</h2><p>Faites le point sur votre maturité digitale et vos priorités.</p><Link className="button button-outline" to="/contact?subject=diagnostic#contact-form">Échanger avec un expert</Link></article></aside></div></section></main>;
+  return <main id="main" className="suite-page contact-page"><PageHero eyebrow="CONTACT" title={<>Parlons de votre projet<br /><em>de digitalisation.</em></>} description="Nos experts sont à votre écoute pour comprendre vos enjeux et vous accompagner vers une croissance durable." image="executive.png" explore="#contact-form" exploreLabel="Nous contacter" /><section id="contact-form" className="contact-section"><div className="container contact-layout"><ContactForm endpoint={endpoint} topic={topic} /><aside className="contact-aside"><article><span className="suite-icon"><img src={`${A}hero-dashboard.png`} alt="" /></span><h2>Demander une démo</h2><p>Découvrez Costera Suite en action avec un expert métier.</p><ul><li>Présentation personnalisée</li><li>Réponses à vos questions</li><li>Sans engagement</li></ul><Link className="button button-primary" to="/request-demo">Demander une démo</Link></article><article><span className="suite-icon"><img src={`${A}${icons.performance}`} alt="" /></span><h2>Demander un diagnostic</h2><p>Faites le point sur votre maturité digitale et vos priorités.</p><Link className="button button-outline" to="/contact?subject=diagnostic#contact-form">Échanger avec un expert</Link></article></aside></div></section></main>;
 }
 
 export function ContactForm({ endpoint, topic }) {

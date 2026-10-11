@@ -11,6 +11,7 @@ import {
   Target,
   UsersRound,
 } from 'lucide-react';
+import { ASSET_BASE as ASSET } from './assetPath';
 
 const features = [
   {
@@ -49,14 +50,14 @@ export default function RevenuePerformanceReferencePage() {
         <span className="revenue-ref-eyebrow">REVENUE PERFORMANCE CLOUD</span>
         <h1 id="revenue-ref-title">De la donnée à la<br />décision, plus de<br />performance.</h1>
         <p>Fixez vos objectifs, anticipez vos résultats, simplifiez vos commissions et pilotez vos revenus. Donnez à vos équipes les moyens d’atteindre une performance durable.</p>
-        <div className="revenue-ref-actions"><Link className="button button-primary" to="/contact?subject=Revenue%20Performance%20demo#contact-form"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link><a className="button button-outline" href="#revenue-results"><CirclePlay aria-hidden="true" /> Voir la vidéo</a></div>
+        <div className="revenue-ref-actions"><Link className="button button-primary" to="/request-demo?solution=revenue-performance"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link><a className="button button-outline" href="#revenue-results"><CirclePlay aria-hidden="true" /> Voir la vidéo</a></div>
         <ul><li><Check /> Mise en œuvre rapide</li><li><Check /> Accompagnement expert</li><li><Check /> Résultats mesurables</li></ul>
-        <article className="revenue-ref-hero-quote"><img src="/assets/costera-platform-consultation.png" alt="Thomas Bernard, VP Sales" /><Quote aria-hidden="true" /><div><blockquote>« Costera Suite nous donne une visibilité unique pour piloter nos revenus et faire grandir nos équipes. »</blockquote><p><strong>Thomas Bernard</strong><span>VP Sales, Groupe Belmonte</span></p></div></article>
+        <article className="revenue-ref-hero-quote"><img src={`${ASSET}costera-platform-consultation.png`} alt="Thomas Bernard, VP Sales" /><Quote aria-hidden="true" /><div><blockquote>« Costera Suite nous donne une visibilité unique pour piloter nos revenus et faire grandir nos équipes. »</blockquote><p><strong>Thomas Bernard</strong><span>VP Sales, Groupe Belmonte</span></p></div></article>
       </div>
       <div className="revenue-ref-dashboard-wrap">
         <div className="revenue-ref-dashboard" role="img" aria-label="Tableau de bord Revenue Performance Cloud en dirhams marocains">
-          <img src="/assets/revenue-performance-dashboard-mad.png" alt="" />
-          <span className="revenue-ref-dashboard-logo" aria-hidden="true"><img src="/assets/costera-logo-official.png" alt="" /></span>
+          <img src={`${ASSET}revenue-performance-dashboard-mad.png`} alt="" />
+          <span className="revenue-ref-dashboard-logo" aria-hidden="true"><img src={`${ASSET}costera-logo-official.png`} alt="" /></span>
         </div>
         <div className="revenue-ref-handwritten">Des équipes plus performantes.<br />Des entreprises plus humaines.<span /></div>
       </div>
@@ -74,8 +75,8 @@ export default function RevenuePerformanceReferencePage() {
 
     <section className="revenue-ref-cta"><div className="container revenue-ref-cta-inner">
       <div className="revenue-ref-cta-copy"><h2>Prêt à passer à un nouveau niveau<br />de performance ?</h2><p>Découvrez comment Costera Suite peut transformer votre pilotage des revenus.</p></div>
-      <div className="revenue-ref-cta-actions"><Link className="button" to="/contact?subject=Revenue%20Performance%20demo#contact-form">Demander une démo <ArrowRight aria-hidden="true" /></Link><a className="button" href="#revenue-results"><CirclePlay aria-hidden="true" /> Voir la vidéo</a></div>
-      <div className="revenue-ref-summit" role="img" aria-label="Plus de performance. Plus d’humain."><img className="revenue-ref-summit-art" src="/assets/revenue-performance-cta-mountains.png" alt="" /><span className="revenue-ref-summit-note">Plus de performance.<br />Plus d’humain.</span><img className="revenue-ref-summit-hiker" src="/assets/revenue-performance-hiker.png" alt="" /></div>
+      <div className="revenue-ref-cta-actions"><Link className="button" to="/request-demo?solution=revenue-performance">Demander une démo <ArrowRight aria-hidden="true" /></Link><a className="button" href="#revenue-results"><CirclePlay aria-hidden="true" /> Voir la vidéo</a></div>
+      <div className="revenue-ref-summit" role="img" aria-label="Plus de performance. Plus d’humain."><img className="revenue-ref-summit-art" src={`${ASSET}revenue-performance-cta-mountains.png`} alt="" /><span className="revenue-ref-summit-note">Plus de performance.<br />Plus d’humain.</span><img className="revenue-ref-summit-hiker" src={`${ASSET}revenue-performance-hiker.png`} alt="" /></div>
     </div></section>
   </main>;
 }

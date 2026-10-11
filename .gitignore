@@ -10,3 +10,5 @@ checks/browser-stderr.log
 /*.png
 /assets/
 checks/*results*.json
+deploy/*.tar.gz
+deploy/*.zip

@@ -14,6 +14,7 @@ import {
   Trophy,
   UsersRound,
 } from 'lucide-react';
+import { ASSET_BASE as ASSET } from './assetPath';
 
 const features = [
   {
@@ -51,8 +52,8 @@ const results = [
 
 function ReferenceCrop({ type, label }) {
   return <span className={`sales-ref-crop sales-ref-crop-${type}`} role="img" aria-label={label}>
-    <img src={type === 'dashboard' ? '/assets/sales-cloud-dashboard-dh.png' : '/assets/sales-cloud-reference.png'} alt="" draggable="false" />
-    {type === 'dashboard' && <span className="sales-ref-dashboard-logo" aria-hidden="true"><img src="/assets/costera-logo-official.png" alt="" /></span>}
+    <img src={type === 'dashboard' ? `${ASSET}sales-cloud-dashboard-dh.png` : `${ASSET}sales-cloud-reference.png`} alt="" draggable="false" />
+    {type === 'dashboard' && <span className="sales-ref-dashboard-logo" aria-hidden="true"><img src={`${ASSET}costera-logo-official.png`} alt="" /></span>}
   </span>;
 }
 
@@ -86,7 +87,7 @@ export default function SalesCloudReferencePage() {
         <h1 id="sales-ref-title">Transformez vos<br />opportunités en<br /><em>croissance durable.</em></h1>
         <p>Pilotez l’ensemble de votre cycle de vente : prospection, opportunités, devis, facturation et performance commerciale. Une seule plateforme, plus de résultats.</p>
         <div className="sales-ref-actions">
-          <Link className="button button-primary" to="/contact?subject=Sales%20Cloud%20demo#contact-form"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link>
+          <Link className="button button-primary" to="/request-demo?solution=sales-cloud"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link>
           <a className="button button-outline" href="#sales-testimonial"><CirclePlay aria-hidden="true" /> Voir la vidéo (2 min)</a>
         </div>
         <ul aria-label="Avantages de Sales Cloud"><li><Check /> Prise en main rapide</li><li><Check /> Accompagnement dédié</li><li><Check /> Sécurisé et conforme RGPD</li></ul>
@@ -128,7 +129,7 @@ export default function SalesCloudReferencePage() {
 
     <section className="sales-ref-cta"><div className="container sales-ref-cta-inner">
       <div><span>PRÊT À ACCÉLÉRER VOS VENTES ?</span><h2>Passez de l’opportunité à la croissance dès aujourd’hui.</h2></div>
-      <div><Link className="button" to="/contact?subject=Sales%20Cloud%20demo#contact-form"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link><a className="button" href="#sales-testimonial"><CirclePlay aria-hidden="true" /> Voir la vidéo</a></div>
+      <div><Link className="button" to="/request-demo?solution=sales-cloud"><CalendarDays aria-hidden="true" /> Demander une démo <ArrowRight aria-hidden="true" /></Link><a className="button" href="#sales-testimonial"><CirclePlay aria-hidden="true" /> Voir la vidéo</a></div>
     </div></section>
   </main>;
 }

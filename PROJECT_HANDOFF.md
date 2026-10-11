@@ -1,0 +1,102 @@
+# Costera Suite website — project handoff
+
+Package date: 2026-10-02. This handoff covers the React/Vite website in `Site Web/costera-landing`. It is separate from the Perfex CRM application and the older PHP handoff package.
+
+## What is included
+
+The ZIP contains the editable website source, all media used by the site, its lockfile, archived static pages, browser-check scripts, preview images, deployment configuration, and a ready-made production build in `dist/`. This guide is also inside the ZIP. `node_modules`, Git history, browser profiles, temporary test results, deployment archives, environment secrets, and server credentials are intentionally excluded.
+
+## Pages
+
+| Route | Page |
+| --- | --- |
+| `/` | Gestion Commerciale landing page |
+| `/pricing` | Pricing in MAD |
+| `/costera-suite` | Costera Suite platform and solutions overview |
+| `/platform`, `/solutions` | Redirect to `/costera-suite` |
+| `/solutions/growth-cloud` | Growth Cloud |
+| `/solutions/sales-cloud` | Sales Cloud |
+| `/solutions/revenue-performance` | Revenue Performance Cloud |
+| `/costera-intelligence` | Costera Intelligence |
+| `/industries` | Industry solutions |
+| `/resources` | Resources and searchable articles |
+| `/resources/:slug` | Resource article |
+| `/contact` | Contact and trial inquiries |
+| `/request-demo` | Personalized demo request form |
+
+The shared navigation and footer are in `src/App.jsx`. The login link opens `https://costerasuite.com/login`. Trial buttons lead to the contact page; demo buttons lead to the demo request page, sometimes with a preselected solution.
+
+## Main files
+
+| Path | Purpose |
+| --- | --- |
+| `src/App.jsx` | Routes, shared header/footer, home page, pricing page |
+| `src/RequestDemoPage.jsx` and `src/request-demo.css` | Demo request page and styling |
+| `src/*ReferencePage.jsx` and matching CSS | Product, industry, resources, and contact pages |
+| `src/SuitePages.jsx`, `src/CosteraSuitePage.jsx` | Suite content and article pages |
+| `src/assetPath.js` | Resolves asset URLs for root or `/home/` deployment |
+| `public/assets/` | Website images, logos, icons, and fonts |
+| `assets/` | Additional local media retained with the project |
+| `styles.css`, `pricing.css`, `src/*.css` | Site styling |
+| `checks/` | Browser audit scripts and fixture page |
+| `legacy/` | Archived static site files |
+| `deploy/nginx-spa.conf` | Nginx SPA fallback for `/home/` |
+| `dist/` | Production build ready for `/home/` |
+| `previews/` | Desktop and mobile review screenshots |
+
+## Run locally
+
+Install Node.js and npm, extract the ZIP, and run from the `costera-landing` folder:
+
+```powershell
+npm ci
+npm run dev
+```
+
+Open the URL printed by Vite, usually `http://127.0.0.1:5173/`. `npm ci` uses the included `package-lock.json` to restore dependencies.
+
+## Build and deploy
+
+The current live website is mounted at `https://costerasuite.com/home/`. To rebuild for that path:
+
+```powershell
+npm run build:home
+```
+
+This creates `dist/`. Deploy the **contents** of `dist/` to the site's `/home/` document directory. Preserve a backup of the existing deployment, copy assets before replacing `index.html`, and ensure the web server serves `/home/index.html` for client-side routes. The included `deploy/nginx-spa.conf` shows the Nginx rule. The included `public/.htaccess` is for a root-mounted Apache build; it is not the `/home/` Nginx configuration.
+
+For a site mounted at the domain root, use `npm run build` and configure a root SPA fallback instead. The ZIP's `dist/` was built for `/home/`, so rebuild it if the mount path changes.
+
+## Forms and integrations
+
+The contact and demo forms use the optional `VITE_CONTACT_ENDPOINT`. The newsletter form uses the optional `VITE_NEWSLETTER_ENDPOINT`. Copy `.env.example` to `.env` and set endpoint URLs before building if direct submission is needed. Never put passwords or API secrets in `VITE_` variables; Vite embeds these values in browser code.
+
+Without a configured endpoint, each form opens a prepared email in the visitor's mail application. The visitor must send that email. A production endpoint must accept the documented POST JSON, allow the website origin, and return success only after the message or subscription is stored or delivered. Test a complete submission before relying on it.
+
+## Validation and version
+
+The latest `npm run build:home` completed successfully before this package was created. `checks/pricing-preview.ps1` audits routes, responsive layout, assets, navigation, and pricing controls; `checks/intelligence-preview.ps1` checks reference pages. Run the relevant checks after changing page layout or links.
+
+The packaged source corresponds to local Git commit `80e43e3ed853049ce5945debc441187692f01908` (`Add demo request page and production home deployment updates`). At packaging time, that commit had **not** been pushed to `https://github.com/ezzakiayman/costera-suite-website` because GitHub authentication was unavailable in this session. The ZIP is an independent copy of the complete website and does not require GitHub access.
+
+## GitHub publication update (11 October 2026)
+
+The Desktop source package was used to update the public GitHub `main` branch.
+Before publication, GitHub was at `863c3c4` and lacked `/request-demo`.
+The Desktop `dist/` HTML, main JS, and main CSS matched the deployed files at
+`/www/wwwroot/costerasuite.com/home` by SHA-256. Other live assets were not
+hash-checked. No production deployment was performed during the GitHub update.
+
+The published source changes five stylesheet URLs for the Manrope fonts and
+executive image to use `public/assets/` through Vite's `/home/` base path.
+This lets a clean GitHub checkout build without unresolved asset warnings;
+the generated asset filenames differ from the currently deployed build.
+`npm run build:home` passed. Desktop and mobile browser checks passed for
+`/costera-intelligence` and `/request-demo` (images, links, and overflow).
+The older pricing audit failed on a stale DOM selector and needs updating.
+
+## Notes for a new maintainer
+
+- Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.
+- Do not upload the `previews/`, `legacy/`, source files, or this guide to the public document directory when deploying. Upload only `dist/` contents.
+- Keep hosting, SSH, aaPanel, CRM, and API credentials in a password manager. None are included in this package.

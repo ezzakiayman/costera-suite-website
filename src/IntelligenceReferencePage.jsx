@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, BarChart3, BookOpen, Box, CalendarDays, Clock3, Cloud, Database, LayoutGrid, Lightbulb, ShieldCheck, Sparkles, UsersRound, Zap } from 'lucide-react';
+import { ASSET_BASE as ASSET } from './assetPath';
 
 const capabilities = [
   { name: 'Costera Copilot', subtitle: 'Votre assistant IA au quotidien', text: 'Un copilote intelligent qui comprend vos enjeux, répond à vos questions et vous aide à agir plus vite.', icon: Sparkles, tone: 'purple' },
@@ -25,7 +26,7 @@ const outcomes = [
 export default function IntelligenceReferencePage() {
   return <main id="main" className="intelligence-ref">
     <section className="intelligence-ref-hero" aria-labelledby="intelligence-ref-title">
-      <img className="intelligence-ref-hero-photo" src="/assets/costera-intelligence-hero.png" alt="Une professionnelle dans un bureau lumineux" fetchPriority="high" />
+      <img className="intelligence-ref-hero-photo" src={`${ASSET}costera-intelligence-hero.png`} alt="Une professionnelle dans un bureau lumineux" fetchPriority="high" />
       <div className="container intelligence-ref-hero-inner">
         <div className="intelligence-ref-copy">
           <span className="intelligence-ref-eyebrow">AI / COSTERA INTELLIGENCE</span>
@@ -45,6 +46,6 @@ export default function IntelligenceReferencePage() {
 
     <section className="intelligence-ref-section intelligence-ref-outcomes"><div className="container"><h2>Des résultats concrets pour des équipes plus humaines</h2><div className="intelligence-ref-outcome-grid">{outcomes.map(({ title, text, icon: Icon }) => <div key={title}><span className="intelligence-ref-icon"><Icon aria-hidden="true" /></span><strong>{title}</strong><p>{text}</p></div>)}</div></div></section>
 
-    <section className="intelligence-ref-final"><div className="container intelligence-ref-final-inner"><img src="/assets/costera-intelligence-mountains.png" alt="Une personne contemple un paysage de montagnes au crépuscule" loading="lazy" /><div className="intelligence-ref-final-copy"><h2>Construisons une croissance plus humaine, ensemble.</h2><p>Découvrez comment Costera Intelligence peut accompagner votre organisation.</p><div><a className="button button-primary" href="#intelligence-capabilities">Découvrir Costera Intelligence <ArrowRight aria-hidden="true" /></a><Link className="button button-outline" to="/contact?subject=Costera%20Intelligence#contact-form">Demander une démo</Link></div></div><span className="intelligence-ref-final-note">Augmenter les humains.<br />Pas les remplacer.</span></div></section>
+    <section className="intelligence-ref-final"><div className="container intelligence-ref-final-inner"><img src={`${ASSET}costera-intelligence-mountains.png`} alt="Une personne contemple un paysage de montagnes au crépuscule" loading="lazy" /><div className="intelligence-ref-final-copy"><h2>Construisons une croissance plus humaine, ensemble.</h2><p>Découvrez comment Costera Intelligence peut accompagner votre organisation.</p><div><a className="button button-primary" href="#intelligence-capabilities">Découvrir Costera Intelligence <ArrowRight aria-hidden="true" /></a><Link className="button button-outline" to="/request-demo?solution=costera-intelligence">Demander une démo</Link></div></div><span className="intelligence-ref-final-note">Augmenter les humains.<br />Pas les remplacer.</span></div></section>
   </main>;
 }

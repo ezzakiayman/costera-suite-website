@@ -1,7 +1,7 @@
-@font-face{font-family:Manrope;src:url('assets/manrope-regular.ttf') format('truetype');font-display:swap;font-weight:200 500}
-@font-face{font-family:Manrope;src:url('assets/manrope-semibold.ttf') format('truetype');font-display:swap;font-weight:600}
-@font-face{font-family:Manrope;src:url('assets/manrope-bold.ttf') format('truetype');font-display:swap;font-weight:700}
-@font-face{font-family:Manrope;src:url('assets/manrope-extrabold.ttf') format('truetype');font-display:swap;font-weight:750 800}
+@font-face{font-family:Manrope;src:url('/assets/manrope-regular.ttf') format('truetype');font-display:swap;font-weight:200 500}
+@font-face{font-family:Manrope;src:url('/assets/manrope-semibold.ttf') format('truetype');font-display:swap;font-weight:600}
+@font-face{font-family:Manrope;src:url('/assets/manrope-bold.ttf') format('truetype');font-display:swap;font-weight:700}
+@font-face{font-family:Manrope;src:url('/assets/manrope-extrabold.ttf') format('truetype');font-display:swap;font-weight:750 800}
 
 :root{
   --purple:#6A38E6;
@@ -130,7 +130,7 @@ h2{font-size:32px;line-height:1.2;font-weight:600;letter-spacing:-1px}
 .pillar-icon svg{width:27px;height:27px;fill:none;stroke:white;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .pillar h3{font-size:14px;line-height:1.4;margin:3px 0 9px;font-weight:700}
 .pillar p{font-size:12px;line-height:1.6;color:var(--text)}
-.solution-background{position:absolute;inset:0 0 0 73%;background:url('assets/executive.png') right center/auto 165% no-repeat;opacity:.27;mask-image:linear-gradient(90deg,transparent,#000 90%)}
+.solution-background{position:absolute;inset:0 0 0 73%;background:url('/assets/executive.png') right center/auto 165% no-repeat;opacity:.27;mask-image:linear-gradient(90deg,transparent,#000 90%)}
 .solution-results{position:relative;flex:1;display:flex;align-items:center;justify-content:flex-end;z-index:1}
 .results-stack{display:grid;gap:10px;width:178px}
 .result-card{display:flex;align-items:center;gap:13px;padding:17px 16px;border:1px solid #ffffffb3;border-radius:14px;background:#ffffffeb;backdrop-filter:blur(12px)}

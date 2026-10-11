@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-
-const A = '/assets/';
+import { ASSET_BASE as A } from './assetPath';
 
 const clouds = [
   { name: 'Growth Cloud', text: 'Attirez, convertissez et développez votre marché.', icon: 'icon_performance_commerciale.png', href: '/solutions/growth-cloud', tone: 'violet' },
@@ -15,7 +14,7 @@ const clouds = [
 const stories = [
   { type: 'GUIDE', title: 'Digitalisation : par où commencer ?', text: 'Les étapes clés pour structurer votre transformation digitale.', image: 'costera-leadership-hero.png', href: '/resources/demarrer-digitalisation' },
   { type: 'CAS D’USAGE', title: 'Automatiser sa facturation', text: 'Reliez vos documents et gardez les validations visibles.', image: 'hero-dashboard.png', href: '/resources/automatiser-facturation' },
-  { type: 'COMPARATIF', title: 'Choisir sa gestion commerciale', text: 'Comparez les usages, l’adoption et l’accompagnement.', image: 'pricing-dashboard.png', href: '/resources/choisir-gestion-commerciale' },
+  { type: 'COMPARATIF', title: 'Choisir sa gestion commerciale', text: 'Comparez les usages, l’adoption et l’accompagnement.', image: 'costera-dashboard-mad.png', href: '/resources/choisir-gestion-commerciale' },
 ];
 
 const steps = [
@@ -40,7 +39,7 @@ export default function SolutionsReferencePage({ embedded = false, showHero = tr
     {showHero && <section className="solution-ref-hero" aria-labelledby="solutions-title">
       <img className="solution-ref-photo" src={`${A}costera-leadership-hero.png`} alt="Une dirigeante travaille avec Costera Suite" fetchPriority="high" />
       <div className="container solution-ref-hero-inner">
-        <div className="solution-ref-copy"><span className="eyebrow">SOLUTIONS</span><h1 id="solutions-title">Des solutions modulaires<br />pour piloter votre croissance.</h1><p>Alignez vos équipes, vos données et vos processus grâce à un Business Operating System complet, modulaire et pensé pour les entreprises en croissance.</p><div className="solution-ref-actions"><Link className="button button-primary" to="/contact?subject=demo#contact-form">Demander une démo <span aria-hidden="true">→</span></Link><a className="button button-outline" href="#business-clouds">Découvrir nos solutions</a></div><ul className="solution-ref-assurances"><li>Modulaire et évolutif</li><li>Déployé progressivement</li><li>Adapté à vos équipes</li></ul></div>
+        <div className="solution-ref-copy"><span className="eyebrow">SOLUTIONS</span><h1 id="solutions-title">Des solutions modulaires<br />pour piloter votre croissance.</h1><p>Alignez vos équipes, vos données et vos processus grâce à un Business Operating System complet, modulaire et pensé pour les entreprises en croissance.</p><div className="solution-ref-actions"><Link className="button button-primary" to="/request-demo?solution=costera-suite">Demander une démo <span aria-hidden="true">→</span></Link><a className="button button-outline" href="#business-clouds">Découvrir nos solutions</a></div><ul className="solution-ref-assurances"><li>Modulaire et évolutif</li><li>Déployé progressivement</li><li>Adapté à vos équipes</li></ul></div>
         <div className="solution-ref-hero-note">Des entreprises plus alignées,<br />plus agiles, plus humaines.</div>
         <div className="solution-ref-hero-points" aria-label="Les avantages de Costera"><span><strong>Vue unifiée</strong><small>Des données connectées</small></span><span><strong>Équipes alignées</strong><small>Du terrain à la direction</small></span><span><strong>Impact durable</strong><small>Des décisions éclairées</small></span></div>
       </div>
@@ -56,7 +55,7 @@ export default function SolutionsReferencePage({ embedded = false, showHero = tr
 
     <section className="solution-ref-section solution-ref-faq"><div className="container"><Heading eyebrow="FAQ" title="Vos questions, nos réponses." /><div className="solution-ref-faq-grid"><aside><strong>Vous ne trouvez pas la réponse à votre question ?</strong><p>Notre équipe est là pour vous aider.</p><Link className="button button-outline" to="/contact">Contacter un expert <span aria-hidden="true">→</span></Link></aside><div>{questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></div></div></section>
 
-    <section className="solution-ref-bottom"><div className="container"><div><span>PRÊT À PASSER À L’ACTION ?</span><h2>Prêt à construire une croissance plus durable ?</h2><p>Échangez avec nos experts et trouvez la solution adaptée à vos enjeux.</p></div><div><Link className="button button-primary" to="/contact?subject=demo#contact-form">Demander une démo <span aria-hidden="true">→</span></Link><Link className="button button-outline" to="/contact">Parler à un expert</Link></div></div></section>
+    <section className="solution-ref-bottom"><div className="container"><div><span>PRÊT À PASSER À L’ACTION ?</span><h2>Prêt à construire une croissance plus durable ?</h2><p>Échangez avec nos experts et trouvez la solution adaptée à vos enjeux.</p></div><div><Link className="button button-primary" to="/request-demo?solution=costera-suite">Demander une démo <span aria-hidden="true">→</span></Link><Link className="button button-outline" to="/contact">Parler à un expert</Link></div></div></section>
   </>;
   return embedded ? <div className="solution-ref">{content}</div> : <main id="main" className="solution-ref">{content}</main>;
 }
