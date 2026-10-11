@@ -119,7 +119,8 @@ export const resourceArticles = [
     type: 'Guide',
     title: 'Digitaliser sa gestion commerciale : par où commencer ?',
     text: 'Une méthode progressive pour passer des outils dispersés à un suivi commercial partagé.',
-    image: 'resources-guide.png',
+    image: 'resources/demarrer-digitalisation.webp',
+    cardImage: 'resources/demarrer-digitalisation-card.webp',
     sections: [
       ['Partir du travail réel', 'Avant de choisir un outil, suivez une demande client de son arrivée jusqu’au paiement. Où le prospect est-il enregistré ? Qui prépare le devis ? Comment retrouve-t-on la prochaine action et les factures en attente ? Notez les fichiers, messages et doubles saisies utilisés à chaque étape. Ce parcours concret révèle les pertes d’information sans transformer la digitalisation en projet abstrait.'],
       ['Choisir un premier parcours', 'Commencez par un périmètre que votre équipe peut réellement adopter, par exemple le suivi des prospects, des opportunités et des devis. Désignez un responsable, définissez le résultat attendu et fixez une date de revue. Vouloir migrer simultanément les ventes, les projets et tous les documents augmente la complexité. Une première étape maîtrisée donne une base plus solide pour la suite.'],
@@ -135,7 +136,8 @@ export const resourceArticles = [
     type: 'Cas d’usage',
     title: 'Du devis au paiement : organiser sa facturation',
     text: 'Un scénario pratique pour limiter les ressaisies sans perdre les validations humaines.',
-    image: 'resources-automation.png',
+    image: 'resources/automatiser-facturation.webp',
+    cardImage: 'resources/automatiser-facturation-card.webp',
     sections: [
       ['Une situation fréquente', 'Imaginons une société de services qui prépare ses devis dans un fichier, reçoit les accords par email et recrée ensuite les factures dans un autre outil. Les équipes doivent rechercher la bonne version, vérifier les montants et demander où en est le règlement. Ce cas est illustratif : il décrit une difficulté courante, pas le témoignage ni les résultats mesurés d’un client Costera.'],
       ['Clarifier le parcours avant de l’automatiser', 'Dessinez les étapes de la demande à l’encaissement : proposition, validation du devis, éventuelle livraison ou mission, émission de la facture, échéance et paiement. Pour chaque étape, indiquez la personne responsable et le document qui fait foi. Une automatisation ne répare pas un processus où personne ne sait qui valide les prix ou confirme que la prestation a été réalisée.'],
@@ -151,7 +153,8 @@ export const resourceArticles = [
     type: 'Comparatif',
     title: 'Choisir un logiciel de gestion commerciale au Maroc',
     text: 'Une grille de décision pour comparer Excel, la facturation seule et une plateforme commerciale.',
-    image: 'resources-comparison.png',
+    image: 'resources/choisir-gestion-commerciale.webp',
+    cardImage: 'resources/choisir-gestion-commerciale-card.webp',
     sections: [
       ['Commencer par les usages', 'Écrivez les situations que le futur outil doit couvrir : enregistrer une demande, suivre une opportunité, préparer un devis, connaître les factures ouvertes et retrouver les prochaines actions. Classez ces besoins en indispensables et souhaitables. Une liste de fonctionnalités impressionnante ne remplace pas un parcours de travail fluide pour les commerciaux, les responsables et l’administration.'],
       ['Quand Excel reste pertinent', 'Un tableau peut suffire à une petite activité avec peu de dossiers, un responsable unique et des processus stables. Il est flexible et familier. Ses limites apparaissent lorsque plusieurs personnes modifient les mêmes informations, que les versions se multiplient ou que les relances dépendent de la mémoire de chacun. Comparez votre usage réel, pas une opposition caricaturale entre Excel et un logiciel.'],

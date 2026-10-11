@@ -4,7 +4,8 @@ export const additionalResourceArticles = [
     type: 'Guide',
     title: 'Structurer un pipeline commercial que l’équipe utilise vraiment',
     text: 'Cinq étapes pour rendre les opportunités et les prochaines actions visibles.',
-    image: 'sales-cloud-dashboard-dh.png',
+    image: 'resources/structurer-pipeline-commercial.webp',
+    cardImage: 'resources/structurer-pipeline-commercial-card.webp',
     sections: [
       ['Dessiner le parcours réel', 'Listez les étapes que traverse une opportunité dans votre entreprise, depuis la première demande jusqu’à la décision. Gardez uniquement les étapes qui correspondent à un changement observable. Une colonne « en cours » trop vague empêche de savoir ce qu’il reste à faire.'],
       ['Définir les critères de passage', 'Pour chaque étape, précisez ce qui doit être connu : besoin confirmé, interlocuteur identifié, devis envoyé ou décision reçue. Les commerciaux peuvent ainsi classer les dossiers de façon cohérente. Documentez aussi les opportunités perdues et leur raison, sans en faire une sanction.'],
@@ -18,7 +19,8 @@ export const additionalResourceArticles = [
     type: 'Guide',
     title: 'Préparer ses contacts avant de passer à un CRM',
     text: 'Une méthode simple pour nettoyer, organiser et vérifier les données clients.',
-    image: 'costera-leadership-hero.png',
+    image: 'resources/preparer-migration-contacts-crm.webp',
+    cardImage: 'resources/preparer-migration-contacts-crm-card.webp',
     sections: [
       ['Inventorier les sources', 'Repérez les carnets d’adresses, tableurs, boîtes mail et anciens outils utilisés par les équipes. Notez qui les maintient et quelles données sont encore nécessaires. Ne réunissez pas automatiquement toutes les archives : commencez par les contacts actifs et les dossiers ouverts.'],
       ['Choisir une fiche commune', 'Définissez les informations minimales : entreprise, interlocuteur, coordonnées, responsable interne et statut de la relation. Séparez une société de ses contacts pour éviter de recopier la même information partout. Convenez de règles de nommage compréhensibles par tous.'],
@@ -32,7 +34,8 @@ export const additionalResourceArticles = [
     type: 'Cas d’usage',
     title: 'Distribution : ne plus perdre les devis en attente',
     text: 'Un scénario illustratif pour coordonner commerciaux et responsables de secteur.',
-    image: 'industry-fmcg.png',
+    image: 'resources/cas-usage-relances-distribution.webp',
+    cardImage: 'resources/cas-usage-relances-distribution-card.webp',
     sections: [
       ['Le point de départ', 'Imaginons un distributeur dont les demandes arrivent par téléphone et par email. Les devis sont préparés par plusieurs personnes, mais les réponses des clients restent dans des boîtes individuelles. Ce scénario décrit une organisation possible, pas un résultat obtenu chez un client Costera.'],
       ['Un dossier par opportunité', 'La demande est enregistrée avec le client, les produits concernés, le commercial responsable et une date de réponse prévue. Le devis validé est lié au dossier. Chacun peut retrouver la version envoyée et savoir à qui s’adresser en cas de question.'],
@@ -46,7 +49,8 @@ export const additionalResourceArticles = [
     type: 'Cas d’usage',
     title: 'Services : relier proposition, mission et facturation',
     text: 'Un exemple de coordination entre vente, livraison et administration.',
-    image: 'industry-services.png',
+    image: 'resources/cas-usage-suivi-missions-services.webp',
+    cardImage: 'resources/cas-usage-suivi-missions-services-card.webp',
     sections: [
       ['Une situation illustrative', 'Une société de services signe une mission, puis transmet le dossier à l’équipe chargée de l’exécuter. Si le périmètre et les jalons restent dans les emails du commercial, la livraison et la facturation peuvent diverger. L’exemple qui suit n’est pas un témoignage client.'],
       ['Préparer la passation', 'Après l’accord, consignez le périmètre approuvé, les interlocuteurs, les livrables attendus et les conditions de paiement. Une courte validation entre le commercial et le chef de mission permet de lever les ambiguïtés avant le démarrage.'],
@@ -60,7 +64,8 @@ export const additionalResourceArticles = [
     type: 'Comparatif',
     title: 'CRM ou tableur : à quel moment changer ?',
     text: 'Des critères pratiques pour choisir sans suréquiper votre équipe.',
-    image: 'pricing-dashboard.png',
+    image: 'resources/comparer-crm-tableur.webp',
+    cardImage: 'resources/comparer-crm-tableur-card.webp',
     sections: [
       ['Ce que fait bien un tableur', 'Un tableau partagé peut convenir à une petite équipe qui suit peu de dossiers et maîtrise ses règles de mise à jour. Il est souple, facile à adapter et ne demande pas un déploiement complexe. La décision de changer ne doit pas reposer sur sa seule ancienneté.'],
       ['Repérer les limites concrètes', 'Cherchez les erreurs de version, les contacts dupliqués, les relances oubliées et les informations difficiles à retrouver après une absence. Si ces problèmes sont rares, améliorez d’abord le tableau. S’ils reviennent malgré des règles claires, un CRM mérite d’être évalué.'],
@@ -74,7 +79,8 @@ export const additionalResourceArticles = [
     type: 'Comparatif',
     title: 'Comparer les outils de devis et de facturation',
     text: 'La grille à utiliser avant de choisir une solution pour vos documents commerciaux.',
-    image: 'contact-diagnostic.png',
+    image: 'resources/comparer-logiciels-devis-factures.webp',
+    cardImage: 'resources/comparer-logiciels-devis-factures-card.webp',
     sections: [
       ['Lister les documents nécessaires', 'Recensez les devis, factures, avoirs et éventuels acomptes que votre activité utilise réellement. Vérifiez aussi les circuits de validation et les cas de modification. Une démonstration fondée sur vos documents sera plus utile qu’une liste générale de fonctionnalités.'],
       ['Tester la continuité des données', 'Vérifiez comment les coordonnées clients, les lignes de devis et les conditions convenues passent d’un document à l’autre. Demandez quels contrôles sont possibles avant l’émission. Une reprise automatique mal paramétrée peut créer autant d’erreurs qu’une double saisie.'],
@@ -88,7 +94,8 @@ export const additionalResourceArticles = [
     type: 'Automatisation',
     title: 'Automatiser les relances sans déshumaniser la relation',
     text: 'Des rappels utiles, avec le bon contexte et une validation humaine.',
-    image: 'costera-intelligence-hero.png',
+    image: 'resources/automatiser-relances-commerciales.webp',
+    cardImage: 'resources/automatiser-relances-commerciales-card.webp',
     sections: [
       ['Choisir le bon déclencheur', 'Distinguez un devis envoyé, un rendez-vous à confirmer et une demande restée sans réponse. Chacun appelle un suivi différent. Commencez par des rappels internes qui signalent une action au commercial avant d’automatiser un message destiné au client.'],
       ['Définir les exclusions', 'Une relance ne doit pas partir si le client a répondu, si le dossier est clos ou si une personne traite déjà une difficulté. Prévoyez un moyen simple de suspendre le suivi et d’indiquer pourquoi. Les exceptions protègent la qualité de la relation.'],
@@ -102,7 +109,8 @@ export const additionalResourceArticles = [
     type: 'Automatisation',
     title: 'Automatiser la passation entre vente et opérations',
     text: 'Créer un dossier exploitable dès qu’une proposition est acceptée.',
-    image: 'contact-consultation.png',
+    image: 'resources/automatiser-passation-equipes.webp',
+    cardImage: 'resources/automatiser-passation-equipes-card.webp',
     sections: [
       ['Repérer le moment de passation', 'Une proposition acceptée n’est pas toujours prête à être exécutée. Identifiez les informations et validations nécessaires avant le transfert : périmètre, interlocuteur, échéance, conditions et pièces convenues. L’automatisation doit suivre cette décision, pas la devancer.'],
       ['Définir les responsabilités', 'Nommez la personne qui confirme l’accord, celle qui reçoit le dossier et celle qui vérifie les éléments manquants. Un propriétaire clair évite qu’une notification envoyée à tout le monde ne soit traitée par personne.'],
@@ -116,7 +124,8 @@ export const additionalResourceArticles = [
     type: 'Automatisation',
     title: 'Automatiser un tableau de bord commercial fiable',
     text: 'Passer des chiffres recopiés à des indicateurs compris par l’équipe.',
-    image: 'revenue-performance-dashboard-mad.png',
+    image: 'resources/automatiser-tableaux-bord.webp',
+    cardImage: 'resources/automatiser-tableaux-bord-card.webp',
     sections: [
       ['Partir d’une décision', 'Demandez à chaque responsable quelle décision il prendra grâce à l’indicateur : réattribuer des dossiers, revoir des devis ou anticiper une charge. Un graphique sans usage clair ajoute du bruit, même s’il se met à jour automatiquement.'],
       ['Écrire les définitions', 'Précisez ce que signifie une opportunité active, un devis gagné et une facture en attente. Définissez la période, la devise et les cas exclus. Sans définitions communes, deux équipes peuvent lire des chiffres différents dans le même outil.'],
@@ -130,7 +139,8 @@ export const additionalResourceArticles = [
     type: 'Facturation',
     title: 'Préparer une facture sans reprendre toutes les données',
     text: 'Les contrôles à prévoir entre le devis accepté et le document émis.',
-    image: 'article-preparer-facture.png',
+    image: 'resources/preparer-premiere-facture.webp',
+    cardImage: 'resources/preparer-premiere-facture-card.webp',
     sections: [
       ['Vérifier la base client', 'Confirmez l’identité du client et les coordonnées à utiliser avant de créer le document. Lorsque plusieurs entités ou adresses existent, choisissez la bonne fiche. Une donnée reprise automatiquement reste une donnée à contrôler.'],
       ['Reprendre les éléments convenus', 'Comparez les lignes du devis accepté aux prestations ou produits réellement à facturer. Vérifiez quantités, remises, acomptes et éventuels changements approuvés. Conservez la référence de l’accord pour faciliter une question ultérieure.'],
@@ -144,7 +154,8 @@ export const additionalResourceArticles = [
     type: 'Facturation',
     title: 'Suivre les factures en attente de paiement',
     text: 'Organiser les échéances, les vérifications et des relances adaptées.',
-    image: 'article-suivi-impayes.png',
+    image: 'resources/suivre-factures-impayees.webp',
+    cardImage: 'resources/suivre-factures-impayees-card.webp',
     sections: [
       ['Tenir une vue à jour', 'Rassemblez les factures émises, leurs échéances et les paiements rapprochés. Distinguez une facture non échue d’un retard confirmé. Sans cette base, une relance peut partir alors qu’un règlement est déjà reçu.'],
       ['Examiner les écarts', 'Avant de contacter le client, vérifiez les paiements partiels, les références manquantes et les contestations ouvertes. Associez chaque échange au dossier concerné. Une facture contestée ne se traite pas comme un simple oubli.'],
@@ -158,7 +169,8 @@ export const additionalResourceArticles = [
     type: 'Facturation',
     title: 'Organiser les corrections de facture et les avoirs',
     text: 'Un circuit de vérification pour traiter les erreurs sans perdre l’historique.',
-    image: 'article-avoirs-corrections.png',
+    image: 'resources/organiser-avoirs-corrections.webp',
+    cardImage: 'resources/organiser-avoirs-corrections-card.webp',
     sections: [
       ['Identifier la demande', 'Notez qui signale l’erreur, quel document est concerné et ce qui doit être vérifié : coordonnées, quantité, prix ou prestation. Rassemblez la proposition acceptée et les éventuels échanges de modification avant de décider.'],
       ['Faire valider la correction', 'Distinguez une information à clarifier d’un document qui doit être corrigé. Définissez qui autorise la correction et qui prépare le document correspondant. Les modalités applicables à votre situation doivent être confirmées avec votre conseil comptable ou fiscal.'],
