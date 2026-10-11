@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { IndustryApproach, PlatformDetails, ProductJourney } from './RecommendationSections';
 import { ASSET_BASE as A } from './assetPath';
+import { additionalResourceArticles } from './additionalResourceArticles';
 
 const DEMO = '/request-demo';
 
@@ -161,6 +162,7 @@ export const resourceArticles = [
       ['Prendre une décision démontrable', 'Attribuez une note simple à chaque solution sur vos critères prioritaires : suivi commercial, facturation, adoption, intégrations, accompagnement et coût complet. Conservez les questions restées sans réponse et demandez une démonstration complémentaire avant de signer. Costera peut être évalué sur cette même grille, sans supposer qu’il sera le meilleur choix pour tous les contextes.'],
     ],
   },
+  ...additionalResourceArticles,
 ];
 
 export function ResourceArticlePage() {

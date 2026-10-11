@@ -28,7 +28,6 @@ const benefits = [
 
 function matchesTopic(article, topic) {
   if (topic === 'Tout') return true;
-  if (topic === 'Automatisation' || topic === 'Facturation') return article.slug === 'automatiser-facturation';
   return article.type === topic;
 }
 
@@ -79,7 +78,7 @@ export default function ResourcesReferencePage() {
 
     <section className="resources-ref-topics" aria-label="Explorer par sujet"><div className="container resources-ref-topic-grid">{topics.map(({ label, detail, icon: Icon, filter }) => <button className="resources-ref-topic" type="button" aria-pressed={topic === filter} key={label} onClick={() => selectTopic(filter)}><span className="resources-ref-topic-icon"><Icon aria-hidden="true" /></span><strong>{label}</strong><small>{detail}</small><ArrowRight className="resources-ref-topic-arrow" aria-hidden="true" /></button>)}</div></section>
 
-    <section className="resources-ref-articles" ref={articleSection} id="resources-articles"><div className="container"><div className="resources-ref-section-head"><h2>{topic === 'FAQ' ? 'Questions fréquentes' : topic === 'Tout' && !query ? 'Articles à la une' : query ? `Résultats pour « ${query} »` : topic}</h2><button type="button" onClick={() => { setTopic('Tout'); setQuery(''); articleSection.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>Voir tous les articles <ArrowRight aria-hidden="true" /></button></div>
+    <section className="resources-ref-articles" ref={articleSection} id="resources-articles"><div className="container"><div className="resources-ref-section-head"><h2>{topic === 'FAQ' ? 'Questions fréquentes' : topic === 'Tout' && !query ? 'Tous les articles' : query ? `Résultats pour « ${query} »` : topic}</h2><button type="button" onClick={() => { setTopic('Tout'); setQuery(''); articleSection.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>Voir tous les articles <ArrowRight aria-hidden="true" /></button></div>
       {topic === 'FAQ' ? <div className="resources-ref-faq">{questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}<Link to="/contact?subject=Question%20ressources#contact-form">Une autre question ? Contactez-nous <ArrowRight aria-hidden="true" /></Link></div> : <div className="resources-ref-article-grid">{filteredArticles.map(article => <Link className="resources-ref-article" to={`/resources/${article.slug}`} key={article.slug}><img src={`${ASSET}${article.image}`} alt="" loading="lazy" /><div><span>{article.type}</span><h3>{article.title}</h3><p>{article.text}</p><div className="resources-ref-article-foot"><span>Costera Suite</span><span>Lire l’article <ArrowRight aria-hidden="true" /></span></div></div></Link>)}{filteredArticles.length === 0 && <p className="resources-ref-empty">Aucun article ne correspond à cette recherche. <button type="button" onClick={() => { setTopic('Tout'); setQuery(''); }}>Voir tous les articles</button></p>}</div>}
     </div></section>
 
