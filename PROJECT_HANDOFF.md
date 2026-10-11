@@ -227,6 +227,15 @@ uploaded archive and staged/live file hashes matched. Public HTTPS returned
 200 for both icons with the expected content types, and live HTML/Chrome
 included the new favicon link. No Perfex CRM files were changed.
 
+## Perfex admin access check (11 October 2026)
+
+Public HTTPS checks confirmed `/admin` redirects to
+`https://costerasuite.com/admin/authentication`, which serves the Perfex
+administrator email/password form and links to
+`/admin/authentication/forgot_password`. The website navigation's `/login`
+destination is a separate customer-facing page. No admin credentials were
+tested, no account session was opened, and no CRM/server settings changed.
+
 ## Notes for a new maintainer
 
 - Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.
