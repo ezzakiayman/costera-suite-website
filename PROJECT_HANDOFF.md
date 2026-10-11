@@ -163,6 +163,28 @@ the Resources page, all 15 article URLs, and `index-Cw0p_Etz.js`; live Chrome
 rendered all 15 cards. Full interactive filter and mobile browser audits of
 the live domain remain unrun. No Perfex CRM files were changed.
 
+## Distinct resource imagery (11 October 2026)
+
+Each of the 15 resource articles now uses a different image file and a
+different SHA-256 image hash. Twelve assignments in
+`src/additionalResourceArticles.js` use existing relevant project assets or
+three new 1672x941 invoice-focused images in `public/assets/`:
+`article-preparer-facture.png`, `article-suivi-impayes.png`, and
+`article-avoirs-corrections.png`. The three new assets were made with the
+built-in image generation tool using prompts for invoice preparation,
+overdue-payment review, and collaborative invoice correction. Original
+resource imagery, text, slugs, layout, and category filters remain unchanged.
+
+`npm run build:home` passed. Asset checks found 15 existing files with
+distinct hashes; the Resources page was visually inspected locally on desktop.
+Source commit `4c1be7a` was pushed to GitHub `main`. The matching build was
+deployed to `/www/wwwroot/costerasuite.com/home` after backing up the prior
+site to `/root/costera-home-pre-unique-images-20261011.tar.gz`. The upload,
+staged/live HTML, and staged/live `index-BkcfJqdN.js` passed SHA-256 checks.
+Public HTTPS checks returned 200 for the Resources page, new finance images,
+and related article routes; live Chrome rendered 15 cards with 15 distinct
+image URLs. Full live mobile and image-decoding audits remain unrun.
+
 ## Notes for a new maintainer
 
 - Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.
