@@ -118,6 +118,30 @@ new JS/CSS assets, and the separate `/login` page. The new JS contains the
 corrected phrase `informations de vos`. Full browser checks of the live domain
 were not run; the matching local build passed desktop/mobile card checks.
 
+## Resource article rewrite and deployment (11 October 2026)
+
+The three existing `/resources/:slug` articles were rewritten in French in
+`src/SuitePages.jsx`, preserving their slugs, images, categories, and the
+Resources page layout. Each now has seven practical sections. The guide covers
+a progressive commercial rollout; the facturation case is explicitly
+illustrative and distinguishes possible automation from confirmed setup; the
+comparison provides balanced selection criteria for a Moroccan business.
+No invented client results, specific regulatory compliance claim, or
+unverified competitor comparison was added.
+
+`npm run build:home` passed. Local desktop/mobile browser checks passed for
+the Resources hub and all three article URLs, including images, links, and
+horizontal overflow. Source commit `a6ba494` was pushed to GitHub `main`.
+The matching build was deployed to `/www/wwwroot/costerasuite.com/home` after
+a full backup at `/root/costera-home-pre-articles-20261011.tar.gz`. The
+uploaded archive, live `index.html`, and live `index-BBlAAODM.js` passed
+SHA-256 checks against their staging copies. Public HTTP checks returned 200
+for `/home/`, `/home/resources`, all three article routes, and the new JS.
+These HTTP checks do not replace a full live-browser audit. The article
+template still uses a generic CTA and generic per-route title; deeper
+article-specific SEO and conversion changes were outside this content-only
+request.
+
 ## Notes for a new maintainer
 
 - Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.
