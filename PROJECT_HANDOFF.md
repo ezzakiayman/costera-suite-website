@@ -185,6 +185,29 @@ Public HTTPS checks returned 200 for the Resources page, new finance images,
 and related article routes; live Chrome rendered 15 cards with 15 distinct
 image URLs. Full live mobile and image-decoding audits remain unrun.
 
+## Resource image optimization (11 October 2026)
+
+All 15 article source PNGs remain untouched in `public/assets/`, while the
+Resources page now uses 30 generated WebP variants in
+`public/assets/resources/`: 720px-wide card images (quality 74) and
+1600px-wide article images (quality 78), encoded with FFmpeg/libwebp. The
+Resources hero also uses the optimized WebP for the contact-migration article.
+The original 15 PNGs total 24.2 MiB; all card variants together are about
+0.31 MiB and all article variants together are about 0.93 MiB. Cards retain
+lazy loading and now request asynchronous decoding. Layout, slugs, and article
+text did not change.
+
+`npm run build:home` passed; all 30 paths resolved, and local Chrome rendered
+15 distinct card images plus the optimized hero/article image. Source commit
+`ba8d8b8` was pushed to GitHub `main`. The matching build was deployed to
+`/www/wwwroot/costerasuite.com/home` after a full backup at
+`/root/costera-home-pre-webp-20261011.tar.gz`. Uploaded archive and staged/live
+HTML/JS hashes matched. Public HTTPS returned 200 with `image/webp`; a checked
+invoice card was 27,142 bytes and its article image 77,680 bytes. Live Chrome
+rendered all 15 unique WebP card URLs and a WebP article image. The live image
+response had Last-Modified and ETag headers but no explicit Cache-Control;
+server cache-header tuning and full mobile/image-decoding audits remain open.
+
 ## Notes for a new maintainer
 
 - Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.
