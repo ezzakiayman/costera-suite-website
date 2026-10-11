@@ -142,6 +142,27 @@ template still uses a generic CTA and generic per-route title; deeper
 article-specific SEO and conversion changes were outside this content-only
 request.
 
+## Resource library expansion (11 October 2026)
+
+The Resources library now has 15 articles: three each in Guides pratiques,
+Cas d’usage, Comparatifs, Automatisation, and Facturation. Twelve new French
+articles are in `src/additionalResourceArticles.js`; the three existing
+articles, their slugs, and the shared article layout remain unchanged.
+`ResourcesReferencePage.jsx` now filters by each article's own type, so
+Automatisation and Facturation no longer reuse the same case-study result.
+The unfiltered heading is "Tous les articles" to reflect the full list.
+
+`npm run build:home` passed. Data checks found exactly three articles per
+requested rubrique, unique new slugs, and five sections per new article.
+Local Chrome rendered 15 cards and a new article's full body. Source commit
+`2957d35` was pushed to GitHub `main` and its build deployed under
+`/www/wwwroot/costerasuite.com/home`. A full pre-deployment backup is at
+`/root/costera-home-pre-15articles-20261011.tar.gz`. Uploaded archive and
+staged/live HTML and JS hashes matched. Public HTTPS checks returned 200 for
+the Resources page, all 15 article URLs, and `index-Cw0p_Etz.js`; live Chrome
+rendered all 15 cards. Full interactive filter and mobile browser audits of
+the live domain remain unrun. No Perfex CRM files were changed.
+
 ## Notes for a new maintainer
 
 - Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.
