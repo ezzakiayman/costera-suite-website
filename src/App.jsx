@@ -28,14 +28,14 @@ const featureContent = {
 };
 
 const featureCards = [
-  ['crm', 'icon_crm_clients_prospects.png', 'CRM Clients & Prospects', <>Centralisez les informations<br />de vos prospects et clients.</>],
-  ['pipeline', 'icon_pipeline_commercial.png', 'Pipeline Commercial', <>Visualisez toutes vos<br />opportunités et leur avancement.</>],
-  ['activities', 'icon_activites_relances.png', 'Activités & Relances', <>Planifiez les appels,<br />rendez-vous et tâches.</>],
-  ['quotes', 'icon_devis.png', 'Devis', <>Créez, envoyez et suivez<br />vos propositions commerciales.</>],
-  ['invoices', 'icon_facturation.png', 'Facturation', <>Générez et suivez<br />vos factures.</>],
-  ['payments', 'icon_paiements.png', 'Paiements', <>Gardez une visibilité<br />claire sur les règlements.</>],
-  ['performance', 'icon_performance_commerciale.png', 'Performance Commerciale', <>Suivez l’activité et les résultats<br />de votre équipe.</>],
-  ['dashboard', 'icon_dashboard_analytics.png', 'Dashboard', <>Accédez aux principaux<br />indicateurs en temps réel.</>],
+  ['crm', 'icon_crm_clients_prospects.png', 'CRM Clients & Prospects', 'Centralisez les informations de vos prospects et clients.'],
+  ['pipeline', 'icon_pipeline_commercial.png', 'Pipeline Commercial', 'Visualisez toutes vos opportunités et leur avancement.'],
+  ['activities', 'icon_activites_relances.png', 'Activités & Relances', 'Planifiez les appels, rendez-vous et tâches.'],
+  ['quotes', 'icon_devis.png', 'Devis', 'Créez, envoyez et suivez vos propositions commerciales.'],
+  ['invoices', 'icon_facturation.png', 'Facturation', 'Générez et suivez vos factures.'],
+  ['payments', 'icon_paiements.png', 'Paiements', 'Gardez une visibilité claire sur les règlements.'],
+  ['performance', 'icon_performance_commerciale.png', 'Performance Commerciale', 'Suivez l’activité et les résultats de votre équipe.'],
+  ['dashboard', 'icon_dashboard_analytics.png', 'Dashboard', 'Accédez aux principaux indicateurs en temps réel.'],
 ];
 
 const planData = [

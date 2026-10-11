@@ -95,6 +95,13 @@ the generated asset filenames differ from the currently deployed build.
 `/costera-intelligence` and `/request-demo` (images, links, and overflow).
 The older pricing audit failed on a stale DOM selector and needs updating.
 
+The eight home feature-card descriptions were changed to plain text on
+11 October 2026. Previously hidden `<br />` elements joined words when CSS
+set `display:none`; normal spaces now let the text wrap naturally. The
+`/home/` build passed, and desktop/mobile browser checks found all eight
+cards and images with no horizontal overflow. This source change has not
+been deployed to the VPS.
+
 ## Notes for a new maintainer
 
 - Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.

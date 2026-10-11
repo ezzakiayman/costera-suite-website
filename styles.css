@@ -152,9 +152,8 @@ h2{font-size:32px;line-height:1.2;font-weight:600;letter-spacing:-1px}
 .feature-card:hover{background:#fcfaff;border-color:#cdb9f4;transform:translateY(-2px);box-shadow:0 6px 16px #6a38e60b}
 .feature-icon{flex-shrink:0;position:relative;width:42px;height:42px;border-radius:11px;background:#f0eafb;overflow:hidden}
 .feature-icon>img{width:59px;height:59px;max-width:none;position:absolute;top:-9px;left:-8px;object-fit:contain;filter:hue-rotate(32deg) saturate(.8)}
-.feature-card strong{display:block;font-size:12px;font-weight:700;line-height:1.4;letter-spacing:-.25px}
+.feature-card strong{display:block;font-size:12px;font-weight:700;line-height:1.4;letter-spacing:0}
 .feature-card>span>span{display:block;font-size:11px;line-height:1.55;color:var(--text);margin-top:4px}
-.feature-card br{display:none}
 
 .site-footer{padding:44px 0 30px;background:#fff;border-top:1px solid #e9e5f1}
 .footer-grid{display:grid;grid-template-columns:1.65fr .85fr .85fr 1fr 1.5fr;gap:26px}
