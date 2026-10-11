@@ -208,6 +208,25 @@ rendered all 15 unique WebP card URLs and a WebP article image. The live image
 response had Last-Modified and ETag headers but no explicit Cache-Control;
 server cache-header tuning and full mobile/image-decoding audits remain open.
 
+## Favicon correction (11 October 2026)
+
+The previous `public/assets/costera_favicon.ico` depicted a rounded purple
+square with extra text, unlike the site logo. The official C mark was cropped
+from the transparent `public/assets/costera-logo-official.png` and exported
+with transparent padding as `public/assets/costera-favicon-v2.png` (256x256);
+the ICO fallback was replaced with the same mark. The page now references
+the new PNG filename in `index.html` to avoid reusing the old cached icon URL.
+The source logo and other site imagery were not changed.
+
+The mark was inspected at 16px and 32px, and the ICO retained transparency.
+`npm run build:home` passed. Source commit `74d5f89` was pushed to GitHub
+`main`. A full pre-deployment backup is at
+`/root/costera-home-pre-favicon-20261011.tar.gz`. Only the two favicon files
+and `index.html` were installed under `/www/wwwroot/costerasuite.com/home`;
+uploaded archive and staged/live file hashes matched. Public HTTPS returned
+200 for both icons with the expected content types, and live HTML/Chrome
+included the new favicon link. No Perfex CRM files were changed.
+
 ## Notes for a new maintainer
 
 - Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.
