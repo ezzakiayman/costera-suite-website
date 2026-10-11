@@ -90,7 +90,8 @@ hash-checked. No production deployment was performed during the GitHub update.
 The published source changes five stylesheet URLs for the Manrope fonts and
 executive image to use `public/assets/` through Vite's `/home/` base path.
 This lets a clean GitHub checkout build without unresolved asset warnings;
-the generated asset filenames differ from the currently deployed build.
+its generated asset filenames differed from the then-deployed build until
+the deployment recorded below.
 `npm run build:home` passed. Desktop and mobile browser checks passed for
 `/costera-intelligence` and `/request-demo` (images, links, and overflow).
 The older pricing audit failed on a stale DOM selector and needs updating.
@@ -99,8 +100,23 @@ The eight home feature-card descriptions were changed to plain text on
 11 October 2026. Previously hidden `<br />` elements joined words when CSS
 set `display:none`; normal spaces now let the text wrap naturally. The
 `/home/` build passed, and desktop/mobile browser checks found all eight
-cards and images with no horizontal overflow. This source change has not
-been deployed to the VPS.
+cards and images with no horizontal overflow. The source was subsequently
+deployed as recorded below.
+
+## Live deployment (11 October 2026)
+
+The feature-card spacing build from source commit `c73b261` was deployed to
+`/www/wwwroot/costerasuite.com/home`. A full pre-deployment backup is stored
+on the VPS at `/root/costera-home-pre-c73b261-20261011.tar.gz`. The build was
+staged and checksum-verified, then assets were copied before `index.html`.
+No Perfex CRM files or server configuration were changed.
+
+The deployed `index.html`, `index-BDxjhT5j.js`, and `index-DtcGx2zX.css`
+SHA-256 hashes matched the local production build. From the VPS, public HTTP
+checks returned 200 for `/home/`, `/home/pricing`, `/home/request-demo`, the
+new JS/CSS assets, and the separate `/login` page. The new JS contains the
+corrected phrase `informations de vos`. Full browser checks of the live domain
+were not run; the matching local build passed desktop/mobile card checks.
 
 ## Notes for a new maintainer
 
