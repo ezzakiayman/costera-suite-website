@@ -236,6 +236,32 @@ administrator email/password form and links to
 destination is a separate customer-facing page. No admin credentials were
 tested, no account session was opened, and no CRM/server settings changed.
 
+## Perfex public FAQ (11 October 2026)
+
+The Perfex knowledge base is separate from the React website in this repository.
+One public category, `Accès, inscription et essai gratuit`, and the ten French
+questions and answers supplied by the user were published in Perfex's native
+knowledge-base tables. The category is at
+`https://costerasuite.com/knowledge-base/category/acces-inscription-essai-gratuit`.
+The tables had no category or article records before insertion. The public
+category listed ten article links, all ten article pages returned HTTP 200,
+and a search for `Trial` found the relevant article. No CRM PHP template,
+React source, or website asset was changed for this publication.
+
+## Pricing registration buttons (12 October 2026)
+
+The Essential, Business, and Performance card actions on `/pricing` now all
+read `Démarrer` and link directly to
+`https://costerasuite.com/authentication/register`. The rest of the pricing
+page and shared navigation retain their previous actions. `npm run build:home`
+passed; the focused desktop/mobile pricing browser audit passed 15 checks.
+The full-site browser audit still stops in its unrelated resources input test.
+The live `/home/pricing` page serves the new `index-BK89ZfCh.js` bundle; public
+checks found three corrected labels, no old misspelling, and HTTP 200 for the
+registration form. Only the built JS and `index.html` were deployed. The
+previous live HTML and JS are backed up at
+`/root/costera-home-pre-demarrer-20261012.tar.gz`.
+
 ## Notes for a new maintainer
 
 - Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.

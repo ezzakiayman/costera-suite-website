@@ -1,4 +1,4 @@
-param([int]$Port = 9241)
+param([int]$Port = 9241, [switch]$PricingOnly)
 $ErrorActionPreference = 'Stop'
 $landingPath = Split-Path $PSScriptRoot -Parent
 $chromePath = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
@@ -65,7 +65,7 @@ try {
   )) {
     Send-BrowserCommand 'Emulation.setDeviceMetricsOverride' @{width=$viewport.width;height=$viewport.height;deviceScaleFactor=1;mobile=$viewport.mobile} | Out-Null
     Send-BrowserCommand 'Page.navigate' @{url=$pageUri} | Out-Null
-    Read-Browser 'new Promise(resolve=>{if(document.readyState==="complete")resolve();else addEventListener("load",resolve,{once:true});}).then(()=>document.fonts.ready).then(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{})))).then(()=>new Promise(r=>setTimeout(r,300)))' | Out-Null
+    Read-Browser 'new Promise(resolve=>{if(document.readyState==="complete")resolve();else window.addEventListener("load",resolve,{once:true});}).then(()=>document.fonts.ready).then(()=>new Promise(r=>setTimeout(r,300)))' | Out-Null
     $dimensions = Read-Browser '({height:document.documentElement.scrollHeight,overflow:document.documentElement.scrollWidth>document.documentElement.clientWidth})'
     $capture = Send-BrowserCommand 'Page.captureScreenshot' @{format='png';captureBeyondViewport=$true;fromSurface=$true;clip=@{x=0;y=0;width=$viewport.width;height=$dimensions.height;scale=1}}
     [IO.File]::WriteAllBytes((Join-Path $landingPath ('pricing-preview-' + $viewport.name + '.png')), [Convert]::FromBase64String($capture.data))
@@ -89,13 +89,22 @@ try {
   check('Pricing navigation active',document.querySelector('[aria-current="page"]').textContent.trim()==='Tarifs');
   check('React home route linked',document.querySelector('.brand').getAttribute('href')==='/');
   check('React pricing route linked',!!document.querySelector('.nav-link[href="/pricing"]'));
-  check('CTA links supplied',[...document.querySelectorAll('.plan-action')].every(a=>a.href.includes('costerasuite.com')));
-  document.querySelector('.brand').click();await new Promise(r=>setTimeout(r,100));
+  check('Pricing cards register links',[...document.querySelectorAll('.plan-action')].every(a=>a.textContent.trim()==='D\u00e9marrer'&&a.href==='https://costerasuite.com/authentication/register'));
+  document.querySelector('.brand').click();await new Promise(r=>setTimeout(r,500));
   check('React route navigation works',location.pathname==='/'&&!!document.querySelector('.hero'));
   return results;
 })()
 '@
   $checks += $functional
+
+  if ($PricingOnly) {
+    $failed = @($checks | Where-Object { !$_.passed })
+    Write-Output ('Pricing browser checks: ' + ($checks.Count - $failed.Count) + ' passed, ' + $failed.Count + ' failed')
+    $failed | ForEach-Object { Write-Output ('FAILED: ' + $_.name) }
+    Send-BrowserCommand 'Browser.close' | Out-Null
+    if ($failed.Count) { throw 'Pricing browser checks failed.' }
+    return
+  }
 
   Send-BrowserCommand 'Emulation.setDeviceMetricsOverride' @{width=1440;height=900;deviceScaleFactor=1;mobile=$false} | Out-Null
   $routes = @('/costera-suite','/platform','/solutions','/solutions/growth-cloud','/solutions/sales-cloud','/solutions/revenue-performance','/costera-intelligence','/industries','/resources','/resources/demarrer-digitalisation','/resources/automatiser-facturation','/resources/choisir-gestion-commerciale','/contact')

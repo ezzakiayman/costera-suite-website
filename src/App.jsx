@@ -13,8 +13,8 @@ import RequestDemoPage from './RequestDemoPage';
 import { ASSET_BASE as ASSET } from './assetPath';
 
 const DEMO_URL = '/request-demo';
-const CONTACT_URL = 'https://costerasuite.com/home/contact';
 const LOGIN_URL = 'https://costerasuite.com/login';
+const REGISTER_URL = 'https://costerasuite.com/authentication/register';
 
 const featureContent = {
   crm: ['CRM Clients & Prospects', 'Retrouvez vos prospects, clients, contacts et leur historique commercial dans un seul espace.', ['Fiches clients et prospects', 'Contacts et historique des échanges', 'Une information partagée avec votre équipe']],
@@ -39,9 +39,9 @@ const featureCards = [
 ];
 
 const planData = [
-  { id: 'essential', title: 'Essential', subtitle: 'Pour démarrer simplement', monthly: '490', annual: '4 900', users: 'Jusqu’à 3 utilisateurs', features: ['Prospects & Clients', 'Pipeline commercial', 'Activités & Relances', 'Email', 'Propositions & Devis', 'Bons de livraison', 'Factures & Paiements', 'Produits / Services', 'Dashboard standard'], action: 'Essayer gratuitement', url: '/contact' },
-  { id: 'business', title: 'Business', subtitle: 'Pour structurer et piloter votre équipe', monthly: '890', annual: '8 900', users: 'Jusqu’à 10 utilisateurs', featured: true, features: ['Tout Essential', 'WhatsApp Integration', 'Contrats', 'Objectifs commerciaux', 'Rôles & permissions', 'Champs personnalisés', 'Reporting avancé', 'Facturation récurrente', 'Portail client', 'API Access', 'Configuration personnalisée'], action: 'Demander une démo', url: '/request-demo?solution=sales-cloud' },
-  { id: 'performance', title: 'Performance', subtitle: 'Pour aller plus loin avec Costera', monthly: '1 490', annual: '14 900', users: 'Jusqu’à 25 utilisateurs', features: ['Tout Business', 'Configuration avancée', 'Dashboards personnalisés', 'KPI spécifiques', 'Segmentation avancée', 'Workflows commerciaux', 'Accompagnement renforcé', 'Intégrations spécifiques', 'Support prioritaire'], action: 'Parler à un expert', url: `${CONTACT_URL}?utm_source=pricing&utm_campaign=performance` },
+  { id: 'essential', title: 'Essential', subtitle: 'Pour démarrer simplement', monthly: '490', annual: '4 900', users: 'Jusqu’à 3 utilisateurs', features: ['Prospects & Clients', 'Pipeline commercial', 'Activités & Relances', 'Email', 'Propositions & Devis', 'Bons de livraison', 'Factures & Paiements', 'Produits / Services', 'Dashboard standard'], action: 'Démarrer', url: REGISTER_URL },
+  { id: 'business', title: 'Business', subtitle: 'Pour structurer et piloter votre équipe', monthly: '890', annual: '8 900', users: 'Jusqu’à 10 utilisateurs', featured: true, features: ['Tout Essential', 'WhatsApp Integration', 'Contrats', 'Objectifs commerciaux', 'Rôles & permissions', 'Champs personnalisés', 'Reporting avancé', 'Facturation récurrente', 'Portail client', 'API Access', 'Configuration personnalisée'], action: 'Démarrer', url: REGISTER_URL },
+  { id: 'performance', title: 'Performance', subtitle: 'Pour aller plus loin avec Costera', monthly: '1 490', annual: '14 900', users: 'Jusqu’à 25 utilisateurs', features: ['Tout Business', 'Configuration avancée', 'Dashboards personnalisés', 'KPI spécifiques', 'Segmentation avancée', 'Workflows commerciaux', 'Accompagnement renforcé', 'Intégrations spécifiques', 'Support prioritaire'], action: 'Démarrer', url: REGISTER_URL },
 ];
 
 function ScrollManager() {
