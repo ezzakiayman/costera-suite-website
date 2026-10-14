@@ -350,3 +350,26 @@ installed with a deploy hook to reload the aaPanel Nginx instance. Issuance,
 renewal dry run, Nginx syntax, certificate hostname, root-to-admin-login
 redirect chain, and both tenant login pages passed. Main-site `/home/` still
 returns 200. No user password or authenticated tenant sign-in was tested.
+
+## Automatic tenant subdomains (14 October 2026)
+
+Authoritative wildcard DNS already sends arbitrary `*.costerasuite.com` names
+to the VPS. The server now has a wildcard HTTP Nginx host for ACME challenges
+and an idempotent `/usr/local/sbin/costera-tenant-provision.php` job running
+each minute from `/etc/cron.d/costera-tenant-provision`. It reads active Perfex
+SaaS tenant slugs, validates each hostname, skips an already configured host,
+and otherwise issues a hostname-specific Let's Encrypt certificate, installs
+an exact Nginx vhost from `/etc/costera/tenant-vhost.template.conf`, tests the
+configuration, and reloads aaPanel Nginx. A shared renewal deploy hook reloads
+Nginx after Certbot renews certificates. No DNS API secret is used.
+
+The authoritative DNS lookup and a staging ACME challenge for an unregistered
+probe name passed. PHP lint, provisioner dry run and no-op execution for the
+existing `coin` tenant, template comparison to the working `coin` vhost,
+Nginx syntax, cron's first tick, and main/CRM/coin HTTP checks passed. No test
+customer was created in production, so a complete new-tenant signup/login
+remains unverified. A new active tenant's HTTPS host may take around a minute
+plus certificate issuance to become available. Check
+`/var/log/costera-tenant-provision.log` if provisioning fails; rate limits or
+DNS/ACME outages can delay it. Credential-free local deployment sources are in
+`recovered-live/perfex-tenant-provisioner/` outside this repository.
