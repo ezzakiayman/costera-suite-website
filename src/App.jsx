@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Component, lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ProductPage, ResourceArticlePage } from './SuitePages';
 import CosteraSuitePage from './CosteraSuitePage';
@@ -8,6 +8,7 @@ import RevenuePerformanceReferencePage from './RevenuePerformanceReferencePage';
 import IntelligenceReferencePage from './IntelligenceReferencePage';
 import IndustriesReferencePage from './IndustriesReferencePage';
 import ResourcesReferencePage from './ResourcesReferencePage';
+import FreeToolsPage from './FreeToolsPage';
 import ContactReferencePage from './ContactReferencePage';
 import RequestDemoPage from './RequestDemoPage';
 import { ASSET_BASE as ASSET } from './assetPath';
@@ -15,6 +16,16 @@ import { ASSET_BASE as ASSET } from './assetPath';
 const DEMO_URL = '/request-demo';
 const LOGIN_URL = 'https://costerasuite.com/login';
 const REGISTER_URL = 'https://costerasuite.com/authentication/register';
+const RasSimulatorPage = lazy(() => import('./RasSimulatorPage'));
+
+class SimulatorErrorBoundary extends Component {
+  state = { error: null };
+  static getDerivedStateFromError(error) { return { error }; }
+  render() {
+    if (this.state.error) return <main id="main" className="container free-tools-error"><h1>Le simulateur est momentanément indisponible.</h1><p>Revenez dans quelques instants ou contactez notre équipe.</p><Link to="/resources/tools">Retour aux outils gratuits</Link></main>;
+    return this.props.children;
+  }
+}
 
 const featureContent = {
   crm: ['CRM Clients & Prospects', 'Retrouvez vos prospects, clients, contacts et leur historique commercial dans un seul espace.', ['Fiches clients et prospects', 'Contacts et historique des échanges', 'Une information partagée avec votre équipe']],
@@ -47,7 +58,7 @@ const planData = [
 function ScrollManager() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
-    const titles = { '/pricing': 'Tarifs Costera', '/costera-suite': 'Costera Suite', '/platform': 'Costera Suite', '/solutions': 'Costera Suite', '/solutions/growth-cloud': 'Growth Cloud', '/solutions/sales-cloud': 'Sales Cloud', '/solutions/revenue-performance': 'Revenue Performance Cloud', '/costera-intelligence': 'Costera Intelligence', '/industries': 'Industries Costera', '/resources': 'Ressources Costera', '/contact': 'Contact Costera', '/request-demo': 'Demander une démo Costera' };
+    const titles = { '/pricing': 'Tarifs Costera', '/costera-suite': 'Costera Suite', '/platform': 'Costera Suite', '/solutions': 'Costera Suite', '/solutions/growth-cloud': 'Growth Cloud', '/solutions/sales-cloud': 'Sales Cloud', '/solutions/revenue-performance': 'Revenue Performance Cloud', '/costera-intelligence': 'Costera Intelligence', '/industries': 'Industries Costera', '/resources': 'Ressources Costera', '/resources/tools': 'Outils gratuits', '/resources/tools/simulateur-ras': 'Simulateur RAS TVA et IS', '/contact': 'Contact Costera', '/request-demo': 'Demander une démo Costera' };
     document.title = `${titles[pathname] || (pathname.startsWith('/resources/') ? 'Guide Costera' : 'Costera')} - Costera Suite`;
     document.body.classList.toggle('pricing-page', pathname === '/pricing');
     if (hash) requestAnimationFrame(() => document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView({ behavior: 'smooth' }));
@@ -96,6 +107,7 @@ function Header({ onTrial }) {
           <NavLink className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`} to="/industries" onClick={closeMenu}>Industries</NavLink>
           <NavDropdown id="resources-menu" label="Ressources" active={pathname.startsWith('/resources')} open={dropdown === 'resources'} onToggle={() => toggleDropdown('resources')}>
             <Link to="/resources" onClick={closeMenu}>Guides & ressources<small>Pour accompagner votre croissance.</small></Link>
+            <Link to="/resources/tools" onClick={closeMenu}>Outils gratuits<small>Des simulateurs pour vos décisions.</small></Link>
             <Link to="/contact" onClick={closeMenu}>Parler à notre équipe<small>Une question ? Nous sommes là.</small></Link>
           </NavDropdown>
           <NavLink className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`} to="/pricing" onClick={closeMenu}>Tarifs</NavLink>
@@ -118,7 +130,7 @@ function Footer({ onTrial }) {
   return <footer className="site-footer"><div className="container footer-grid">
     <div className="footer-brand"><Link className="brand" to="/" aria-label="Costera, accueil"><span className="brand-logo"><img src={`${ASSET}brand-guide.png`} width="1672" height="941" alt="Costera Suite" /></span></Link><p>Une solution simple et puissante pour<br />centraliser, piloter et faire grandir votre<br />activité commerciale.</p><strong>Grow Smarter. Operate Better.</strong><small>© {new Date().getFullYear()} Costera. Tous droits réservés.</small></div>
     <div className="footer-column"><strong>Produit</strong><Link to="/costera-suite">Costera Suite</Link><Link to="/pricing">Tarifs</Link><Link to="/costera-intelligence">Costera Intelligence</Link></div>
-    <div className="footer-column"><strong>Ressources</strong><Link to="/resources">Centre de ressources</Link><Link to="/industries">Industries</Link><Link to="/solutions/sales-cloud">Sales Cloud</Link><Link to="/solutions/growth-cloud">Growth Cloud</Link></div>
+    <div className="footer-column"><strong>Ressources</strong><Link to="/resources">Centre de ressources</Link><Link to="/resources/tools">Outils gratuits</Link><Link to="/industries">Industries</Link><Link to="/solutions/sales-cloud">Sales Cloud</Link></div>
     <div className="footer-column"><strong>Entreprise</strong><Link to="/industries">Industries</Link><Link to="/solutions/revenue-performance">Revenue Performance</Link><Link to="/contact">Contact</Link><Link to="/request-demo">Demander une démo</Link></div>
     <div className="footer-cta"><h3>Prêt à simplifier votre<br />gestion commerciale ?</h3><button className="button button-primary button-small" onClick={onTrial}>Essayer gratuitement 14 jours <span aria-hidden="true">→</span></button><Link className="footer-demo" to={DEMO_URL}>Demander une démo</Link><p>Sans engagement</p></div>
   </div></footer>;
@@ -144,6 +156,8 @@ function App() {
       <Route path="/costera-intelligence" element={<IntelligenceReferencePage />} />
       <Route path="/industries" element={<IndustriesReferencePage />} />
       <Route path="/resources" element={<ResourcesReferencePage />} />
+      <Route path="/resources/tools" element={<FreeToolsPage />} />
+      <Route path="/resources/tools/simulateur-ras" element={<SimulatorErrorBoundary><Suspense fallback={<main id="main" className="container" aria-busy="true" style={{ minHeight: 500 }} />}><RasSimulatorPage /></Suspense></SimulatorErrorBoundary>} />
       <Route path="/resources/:slug" element={<ResourceArticlePage />} />
       <Route path="/contact" element={<ContactReferencePage />} />
       <Route path="/request-demo" element={<RequestDemoPage />} />

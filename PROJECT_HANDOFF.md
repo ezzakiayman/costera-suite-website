@@ -267,3 +267,58 @@ previous live HTML and JS are backed up at
 - Keep the public logo and product images in `public/assets/`; references in React use `src/assetPath.js` so `/home/` URLs resolve correctly.
 - Do not upload the `previews/`, `legacy/`, source files, or this guide to the public document directory when deploying. Upload only `dist/` contents.
 - Keep hosting, SSH, aaPanel, CRM, and API credentials in a password manager. None are included in this package.
+
+## Free tools and RAS simulator (14 October 2026)
+
+The public React site now has `Ressources > Outils gratuits` at
+`/home/resources/tools`, with a card linking to
+`/home/resources/tools/simulateur-ras`. Both routes use the existing shared
+header and footer. The simulator is adapted from the separate static package
+under `Desktop/zakoura lms/module 2/Costera_Dossier_Complet_Integration_Simulateur_RAS (1)`;
+its copied source is in `src/ras-simulator/source/`. Run
+`node src/ras-simulator/generate.mjs` after changing the copied CSS or
+controller source. The generator scopes CSS to the simulator and adapts the
+standalone DOM handlers to its React mount. `src/RasSimulatorPage.jsx` loads
+pdf-lib as a same-origin script on the first PDF request, because importing
+the UMD bundle directly did not expose `window.PDFLib` in the production build.
+
+The user stated that a Moroccan tax professional approved the package's
+2026-2028 rules for publication. This is user-provided approval, not an
+independent legal review. The supplied 11 amount and 13 reference calculation
+tests passed. `npm run build:home` passed. A production-mode local browser
+verified the sample calculation (100,000 DH HT, 20,000 DH TVA, 5,000 DH IS
+retained, 15,000 DH TVA retained, 100,000 DH net), PDF generation, and a
+375px mobile viewport without horizontal overflow. Public HTTPS returned 200
+for both routes, and a live browser verified the same sample and successful
+PDF generation. The deployed `index.html` SHA-256 is
+`265543d3004a077287875b15c9fa0c5c5354b6e6b80ed2914dad6369a0ea6b3e`.
+The pre-integration and pre-PDF-fix deployment backups are at
+`/root/costera-home-pre-ras-20261014.tar.gz` and
+`/root/costera-home-pre-pdf-fix-20261014.tar.gz`. Only the new hashed build
+assets and `index.html` were installed in `/www/wwwroot/costerasuite.com/home`;
+Perfex templates were not changed for this feature.
+
+## CRM client cleanup (14 October 2026)
+
+At the user's explicit direction, the main Perfex database was backed up and
+then older customer records were removed in one checked transaction. The cutoff
+was `2026-10-14 00:00:00` in the application's `Africa/Casablanca` timezone.
+Active SaaS tenant client ID 1 was explicitly preserved as an exception, along
+with client IDs 6073, 6074, and 6075 created on 14 October. Both SaaS company
+records, including today's active tenant, remain active.
+
+The transaction deleted 6,071 old clients, 6,070 contacts, 48,560 contact
+permissions, 6,070 contact user-metadata rows, 2 paid invoices and 2 payment
+records, 4 estimates, 1 expense, 1 contract, and their audited item/tax,
+activity, file-index, related-item, and customer-group rows. Independent
+post-checks found exactly the four protected clients, four contacts, seven
+invoices belonging to the preserved tenant, and both active SaaS companies.
+The SQL backup covers all 455 main-database tables, is root-only (`0600`), and
+is stored at `/root/costera-backups/2026-10-14/client-cleanup/main-before.sql`
+with SHA-256
+`2f494500063d1ba9b666de7598bc5e3cb57c796b179a6ed2c35bfe1843f50e1e`.
+The root-only cleanup script and result audit are in the same server directory;
+a credential-free local copy of the script is in the workspace's ignored
+`private/` directory. The expense file's database index was removed but the
+physical upload file was not deleted. Do not restore the full backup into a
+running production database without first accounting for newer records.

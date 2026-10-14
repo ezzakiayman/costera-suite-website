@@ -15,6 +15,7 @@ import './revenue-performance-reference.css';
 import './intelligence-reference.css';
 import './industries-reference.css';
 import './resources-reference.css';
+import './free-tools.css';
 import './contact-reference.css';
 import './request-demo.css';
 
