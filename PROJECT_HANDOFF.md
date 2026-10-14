@@ -322,3 +322,31 @@ a credential-free local copy of the script is in the workspace's ignored
 `private/` directory. The expense file's database index was removed but the
 physical upload file was not deleted. Do not restore the full backup into a
 running production database without first accounting for newer records.
+
+## Client #1 removal and Perfex access repair (14 October 2026)
+
+The user later authorized permanent removal of client ID 1 and its `ltd`
+tenant, superseding the exception above. A fresh root-only full database dump
+and tenant upload archive were validated before execution. The guarded cleanup
+removed the client, contact, seven invoices and linked records, SaaS company
+ID 1, 187 `ltd_` tables, and the `ltd` uploads. Independent checks found only
+today's client IDs 6073, 6074, and 6075, with the active `coin` tenant on
+client 6074 and its 126 tables. The backup and audit are under
+`/root/costera-backups/2026-10-14/client-1-delete/`; do not publish them or
+restore the full dump over newer production data.
+
+For client 6074, Perfex's `admin/clients/login_as_client` action set the
+client session but redirected to `/`, which the public Nginx site routes to
+the marketing `/home`. The live `Clients.php` action now redirects to
+`site_url('clients')`; `php -l` passed. The active primary contact was verified.
+An authenticated browser click still needs user validation.
+
+`coin.costerasuite.com` resolved to the VPS but initially hit aaPanel's default
+site and had no matching TLS certificate. A dedicated Nginx host now serves
+the existing Perfex app, sends HTTP to HTTPS, and routes the tenant root and
+`/home` to `/admin` (avoiding the app's `/home` self-redirect and the public
+marketing directory). A Let's Encrypt certificate for the exact hostname is
+installed with a deploy hook to reload the aaPanel Nginx instance. Issuance,
+renewal dry run, Nginx syntax, certificate hostname, root-to-admin-login
+redirect chain, and both tenant login pages passed. Main-site `/home/` still
+returns 200. No user password or authenticated tenant sign-in was tested.
