@@ -31,7 +31,10 @@ installed at `C:\Users\EDITO\.codex\skills\costera-project`. Its ignored local
 CurrentUser encryption. The credential loader was exercised successfully without
 displaying values. Matching source is in the workspace's `costera-skills-reference`
 checkout. No credential, encrypted bundle or private inventory belongs in GitHub.
-Publication status is recorded separately after commits/pushes.
+Website source commit `daf9c41` was pushed to GitHub main. The Costera skill
+was also published to `ezzakiayman/codex-skills` main (initial commit `1fecb12`)
+and its installed reference is synchronized. The private DPAPI bundle remains
+local and excluded from GitHub.
 
 ## RAS V2.5 integration prepared locally (19 October 2026)
 
