@@ -1,5 +1,109 @@
 # Costera Suite website — project handoff
 
+## RAS V2.5 deployed and verified (19 October 2026)
+
+This supersedes the pending-access/deployment notes below. The user supplied
+working SSH access. The complete live `home` directory was backed up and the
+archive listing checked before installing three new hashed assets, then
+atomically replacing `index.html`. Existing assets were retained. Backup:
+`/root/costera-home-pre-ras-v25-20261019T211854Z.tar.gz`, SHA-256
+`698e8d07c5cf45b0a3b46e0b0de86d7c1fa8457a9a01fea302ac1c309bbe62bc`.
+
+Deployed files: `index-gG6TZqOY.js`, `RasSimulatorPage-Y2iKsTea.js`,
+`RasSimulatorPage-C0c-G0xr.css`, and `index.html`. Uploaded asset hashes matched
+local bytes. The public HTML SHA-256 matches the local build:
+`36fc388b81a66190d75e7c132d96f67b36239982a382e23fabdff4b3c24934a4`.
+The old/new main JS are identical after normalizing simulator chunk filenames.
+The shared CSS and PDF library were already identical and were not overwritten.
+
+Public HTTP checks returned 200 for the home, tools hub, simulator, pricing,
+login and all five required build assets. A live Brave session rendered V2.5,
+showed no uncertainty answer, calculated the reference net 100,000 DH
+(5,000 DH IS and 15,000 DH TVA retained), and displayed the successful PDF
+download message. No browser console error was captured. This verifies the
+download handler; the downloaded PDF was not separately inspected. The supplied
+Node PDF test had passed with 2 pages. Mobile visual QA and full route-remount
+audit remain pending. No CRM, database or server configuration was changed.
+
+A `costera-project` skill was created with verified project references and
+installed at `C:\Users\EDITO\.codex\skills\costera-project`. Its ignored local
+`private/credentials.dpapi` holds the user-provided access under Windows
+CurrentUser encryption. The credential loader was exercised successfully without
+displaying values. Matching source is in the workspace's `costera-skills-reference`
+checkout. No credential, encrypted bundle or private inventory belongs in GitHub.
+Publication status is recorded separately after commits/pushes.
+
+## RAS V2.5 integration prepared locally (19 October 2026)
+
+Access follow-up: found the private access inventory in the older Costera
+project's `.private/` directory. It records the hosting/panel address and
+username, but explicitly states that SSH and panel passwords/keys are not
+stored in that file. Do not copy that inventory into this repository. Opened
+the recorded aaPanel endpoint in Brave; it displays Login with no active
+hosting session. The username is entered, the password field is empty, and
+the tab is marked for handoff. User was asked to sign in there. Windows SSH
+configuration points to a different VPS, and the inspected Windows/Ubuntu SSH
+directories contain no private key. No authentication reset or login guessing
+was attempted. Deployment remains pending authenticated hosting access.
+
+Additional browser check passed: a fresh private-enterprise journey (500m DH
+CA band, invoice 2026-10-19, payment 2026-10-30, personnel transport, attestation
+explicitly yes, 250,000 DH HT, TVA 10%) returns net 256,250 DH, TVA retained
+18,750 DH, zero IS. Both attestation choices initially have aria-pressed false.
+The viewport override was reset after a 375px check; mobile visual QA remains
+inconclusive and is not recorded as passed.
+
+The user requested updating the **production** simulator using the supplied
+`Costera_Dossier_Complet_Integration_Simulateur_RAS_V2_5_FINAL` package and
+explicitly authorized proceeding. Production target confirmed by browser:
+`https://costerasuite.com/home/resources/tools/simulateur-ras`.
+
+This checkout was cloned from GitHub `main` at `dc76629`. The older Desktop
+`costera-landing` copy lacks the simulator and must not be used to replace the
+current production site. Production still displayed the old uncertainty option
+when inspected. No server upload, production edit, GitHub push or deployment
+has been performed for V2.5 in this session.
+
+Local changes copy the supplied modular V2.5 files into
+`src/ras-simulator/source/` and regenerate the scoped CSS and React controller.
+The supplied amount script binds on initial script execution; React now imports
+the generated `amount-controller.js`, which exposes an explicit `bind(input)`
+called after mount. The generator disconnects its MutationObserver and aborts
+the delegated container click handler on unmount. The obsolete reminder timer
+cleanup was removed because V2.5 no longer defines that timer. Shared navigation,
+footer, simulator route, and lazy same-origin PDF library loading are retained.
+The source fiscal rules are copied from the supplied package, without additional
+fiscal changes or independent legal validation.
+
+Checks completed:
+
+- Supplied package tests: 43 scenarios, 93 services, 11 amount cases, 13 reference
+  cases passed; PDF test generated 2 pages.
+- `node src/ras-simulator/generate.mjs` and `npm run build:home` passed.
+- Production-build browser preview at port 4174 with `--base /home/`: simulator
+  mounts, uncertainty option absent, sample returns net 100,000 DH with 5,000 DH
+  IS and 15,000 DH TVA retained.
+- Clicking PDF displayed the application's successful-download status. The
+  browser automation download-event wait timed out; no downloaded PDF file was
+  inspected in this session. The supplied Node PDF-generation test passed.
+- Transport du personnel hides IS qualification; 250,000 DH HT, TVA 10%, bank
+  client and attestation yes returns 256,250 DH net, 18,750 DH TVA retention,
+  zero IS. Direct calculation, previous/next, and amount grouping were exercised.
+- Desktop screenshot inspected; mobile layout, complete fresh-input private
+  enterprise journey, and a full route-remount audit remain to be checked.
+
+Pending: obtain a usable hosting/SSH deployment session or the path to an
+existing credential bundle from the user. Authorization is already received;
+do not request publication approval again. Back up the live website before
+deployment, verify existing production build/environment compatibility, copy
+hashed assets before replacing HTML, and verify the live route and PDF after
+upload. Do not replace CRM files or server configuration.
+
+No installed Costera project skill was found. The GitHub `codex-skills` main
+branch was also inspected via a separate workspace clone and contains Escolia,
+Skillgate and Zakoura project skills, with no matching Costera skill. Unrelated
+skills remain unchanged. This handoff is saved locally only.
+
 Package date: 2026-10-02. This handoff covers the React/Vite website in `Site Web/costera-landing`. It is separate from the Perfex CRM application and the older PHP handoff package.
 
 ## What is included

@@ -5,7 +5,7 @@ import markup from './ras-simulator/source/index.html?raw';
 import pdfLibUrl from './ras-simulator/source/pdf-lib.min.js?url';
 import './ras-simulator/source/rules.js';
 import './ras-simulator/source/report.js';
-import './ras-simulator/source/amount.js';
+import './ras-simulator/amount-controller.js';
 import { mountSimulator } from './ras-simulator/simulator-controller';
 import './ras-simulator/simulator-scoped.css';
 

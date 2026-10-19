@@ -6,6 +6,14 @@ import postcss from 'postcss';
 const here = dirname(fileURLToPath(import.meta.url));
 const source = name => readFileSync(join(here, 'source', name), 'utf8');
 
+// The standalone package binds on script load. React mounts the field later.
+const amount = source('amount.js')
+  .replace('root.CosteraAmount={parse,format};', 'root.CosteraAmount={parse,format,bind};')
+  .replace("if(typeof document==='undefined')return;\nconst input=document.getElementById('ht');", 'function bind(input){if(!input)return;')
+  .replace("input.addEventListener('blur',update);", "input.addEventListener('blur',update);}");
+if (!amount.includes('function bind(input)')) throw new Error('Amount binding changed; review React adaptation');
+writeFileSync(join(here, 'amount-controller.js'), amount);
+
 const css = postcss.parse(['style.css', 'journey.css', 'feedback.css', 'is-review.css'].map(source).join('\n'));
 css.walkAtRules('font-face', rule => rule.remove());
 css.walkRules(rule => {
@@ -24,16 +32,20 @@ const adapt = code => code
   .replaceAll('document.getElementById(id)', 'container.querySelector(`#${id}`)')
   .replaceAll('document.querySelectorAll(', 'container.querySelectorAll(')
   .replaceAll('document.querySelector(', 'container.querySelector(')
-  .replaceAll("document.addEventListener('click'", "container.addEventListener('click'");
+  .replaceAll("document.addEventListener('click'", "listenOnContainer('click'");
 
 const originalUrl = "function url(){return location.protocol==='file:'?'https://simulateur-reglements-maj.soufiane1977.chatgpt.site':location.origin+location.pathname}";
 const app = adapt(source('app.js'));
 if (!app.includes(originalUrl)) throw new Error('Simulator share URL changed; review the integration');
 if (!app.includes('download(await CosteraReport.pdf(c)')) throw new Error('Simulator PDF handler changed; review the integration');
 const help = adapt(source('help-feedback.js'))
-  .replace("$('modify').addEventListener('click',hideFeedback)", "modify.addEventListener('click',hideFeedback)");
+  .replace("$('modify').addEventListener('click',hideFeedback)", "modify.addEventListener('click',hideFeedback)")
+  .replace('new MutationObserver(()=>decorate(detail)).observe(detail,{childList:true});',
+    'const observer=new MutationObserver(()=>decorate(detail));observer.observe(detail,{childList:true});cleanups.push(()=>observer.disconnect());');
 const controller = [
   'export function mountSimulator(container, ensurePdfLib) {',
+  'const lifecycle = new AbortController(), cleanups = [];',
+  'function listenOnContainer(type, listener) { container.addEventListener(type, listener, { signal: lifecycle.signal }); }',
   'const { CosteraRAS, CosteraAmount, CosteraReport } = window;',
   "const missing = ['form','client','ca','invoiceDate','paymentDate','service','ht','vat','isScope','isEvent','eventDate','publicScope','small','arf','result'].filter(id => !container.querySelector(`#${id}`));",
   "if (missing.length) throw new Error(`Champs du simulateur absents : ${missing.join(', ')}`);",
@@ -42,7 +54,7 @@ const controller = [
     .replace('download(await CosteraReport.pdf(c)', 'await ensurePdfLib();download(await CosteraReport.pdf(c)'),
   help,
   adapt(source('is-review.js')),
-  'return () => clearTimeout(reminderTimer);',
+  'return () => { lifecycle.abort(); cleanups.forEach(cleanup => cleanup()); };',
   '}',
 ].join('\n');
 writeFileSync(join(here, 'simulator-controller.js'), controller);

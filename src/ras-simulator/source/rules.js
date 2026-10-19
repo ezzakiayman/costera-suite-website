@@ -58,7 +58,7 @@ const groups=[
 'Profession exercée par une personne physique — hors périmètre IS de cet outil',
 'Courtier / démarcheur d’assurances — régime spécifique',
 'Opérateur télécom ou eau, électricité et assainissement — exclusion spécifique à vérifier',
-'Autre prestation / je ne sais pas']]
+'Autre prestation non listée']]
 ];
 const services=groups.flatMap(([group,list],g)=>list.map((label,i)=>({id:`s${g}_${i}`,group,label,special:g===5&&i>0})));
 const round=n=>Math.round((n+Number.EPSILON)*100)/100;
@@ -71,6 +71,12 @@ function eligibility(client,ca,date){
  const start=lower>=500?'2026-07-01':lower>=350?'2027-01-01':lower>=200?'2028-01-01':null;
  return {active:date>='2026-07-01'&&lower>=threshold,start,threshold};
 }
+const isPotentialIS=service=>{
+ if(!service)return false;
+ if(service.group==='Études, expertise et professions')return true;
+ const l=service.label.toLowerCase();
+ return /(court|commission|mandat|démarch|agent d’affaires|assistance au maître d’ouvrage|consult|audit|conseil|expertis|étude|maîtrise d’œuvre|architect|topograph|traduction|design|recherche|développement|formation|animation|direction|sondage|assistance technique)/i.test(l);
+};
 function simulate(x){
  const fail=error=>({error});
  if(!['bank','insurance','private','public'].includes(x.client))return fail('Identifiez la catégorie de votre client.');
@@ -103,5 +109,5 @@ function simulate(x){
  const is=round(x.ht*isRate/100),ras=round(vatAmount*rasRate/100),treasury=round(is+ras),net=round(gross-treasury);
  return {...x,serviceLabel:service.label,isDate,vatAmount,gross,isRate,rasRate,is,ras,treasury,net,total:round(net+treasury),reasons,exemption,version:'CGI 2026 — vérification 14/10/2026'};
 }
-root.CosteraRAS={groups,services,simulate,eligibility};if(typeof module!=='undefined')module.exports=root.CosteraRAS;
+root.CosteraRAS={groups,services,simulate,eligibility,isPotentialIS};if(typeof module!=='undefined')module.exports=root.CosteraRAS;
 })(typeof window!=='undefined'?window:globalThis);
