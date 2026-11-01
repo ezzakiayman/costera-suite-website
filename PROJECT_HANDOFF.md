@@ -1,5 +1,11 @@
 # Costera Suite website — project handoff
 
+## Pricing to Perfex SaaS packs deployed (1 November 2026)
+
+The user chose the existing Perfex SaaS monthly offers as the source of truth. The `/home/pricing` page now shows 490/890/1489 MAD monthly, 4900/8900/14890 MAD annually (two months free), 3 users per offer, and a 7-day trial. Feature lists reflect the enabled core capabilities and modules. Each Démarrer button links to `/authentication/register?ps_plan=<verified-package-slug>` for the selected plan and billing period. General trial CTAs lead to `/home/pricing#offres` to let visitors select a pack. Live desktop/mobile checks passed all six links, prices and user labels, with no horizontal overflow. Final `index.html` SHA-256: `fb1e15a6b459a097078ba42791e325fb24c6bf17a89950473205a3fffb871fd4`; new JS asset: `6628158adb4f6bb5189a37f2aa7a7f04947a52f080c14c9e6807c63a69646a87`. The prior live RAS simulator chunk was preserved. Full home backups: `/root/costera-backups/2026-11-01-pricing-plan-links/` and `2026-11-01-pricing-plan-links-v2/`.
+
+Perfex changes are outside this React repository: three annual packages added in the live SaaS database; successful trial selection now opens `/clients/?subscription`; the annual Business card is highlighted. See the local handoff at `C:\Users\EDITO\Downloads\costera suite\recovered-live\plan-link-integration\HANDOFF.md`. No test purchase or real signup was performed, so the complete customer journey remains unverified.
+
 ## RAS V2.5 deployed and verified (19 October 2026)
 
 This supersedes the pending-access/deployment notes below. The user supplied
