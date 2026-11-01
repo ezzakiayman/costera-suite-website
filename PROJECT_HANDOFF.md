@@ -490,3 +490,19 @@ plus certificate issuance to become available. Check
 `/var/log/costera-tenant-provision.log` if provisioning fails; rate limits or
 DNS/ACME outages can delay it. Credential-free local deployment sources are in
 `recovered-live/perfex-tenant-provisioner/` outside this repository.
+
+## Perfex verification and trial UI (1 November 2026)
+
+This is a live Perfex change, separate from the React marketing source. The
+`/verification` page now shows one Costera logo, clear confirmation steps, and
+the existing resend action. Registration waits until email verification (and
+admin approval, when enabled) before sending the welcome email. Verification
+and welcome templates for French, English, and Spanish have branded layouts.
+SaaS trial notices show an `Acheter` action and plan cards show
+`Acheter ce forfait`, retaining the existing package-selection route.
+
+The live page was visually checked, all changed PHP files passed lint, and
+six stored mail templates were checked for their logo and action link.
+Authenticated email delivery, a fresh verification click and a purchase remain
+untested. Backups and exact files are described in
+`C:\Users\EDITO\Downloads\costera suite\recovered-live\verification-welcome-trial\HANDOFF.md`.
