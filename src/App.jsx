@@ -15,8 +15,7 @@ import { ASSET_BASE as ASSET } from './assetPath';
 
 const DEMO_URL = '/request-demo';
 const LOGIN_URL = 'https://costerasuite.com/login';
-const BILLING_URL = 'https://costerasuite.com/clients/?subscription';
-const planSubscriptionUrl = (slug) => `${BILLING_URL}&costera_plan=${encodeURIComponent(slug)}`;
+const planSubscriptionUrl = (slug) => `https://costerasuite.com/authentication/register?costera_plan=${encodeURIComponent(slug)}`;
 const RasSimulatorPage = lazy(() => import('./RasSimulatorPage'));
 
 class SimulatorErrorBoundary extends Component {

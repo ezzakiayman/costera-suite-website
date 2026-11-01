@@ -527,3 +527,16 @@ rows are backed up under `/root/costera-backups/2026-11-01-tenant-deployment-ema
 No real email was sent, so inbox rendering and delivery remain unverified.
 Local implementation and checks:
 `C:\Users\EDITO\Downloads\costera suite\recovered-live\tenant-deployment-email\HANDOFF.md`.
+
+## Pricing registration-first flow (1 November 2026)
+
+The six `/home/pricing` pack buttons now open Perfex registration with the
+selected monthly or annual package slug. Perfex saves the selected billing URL
+in the same browser session, so an existing customer can sign in from the
+registration page, while a new customer can complete signup and email
+verification before seeing the selected package in Facturation. The public
+billing route stays login-protected. The React build, PHP lint, public GETs,
+and live browser checks of monthly and annual buttons passed. No signup or
+purchase was performed, so the full post-verification selection remains
+unverified. Local source, hashes, rollback copies and screenshot:
+`C:\Users\EDITO\Downloads\costera suite\recovered-live\pricing-registration-flow\HANDOFF.md`.
