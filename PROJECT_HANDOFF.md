@@ -549,7 +549,8 @@ retaining status polling and completion reload. Active trial notices show the
 package and remaining days without invoice or due-date text; plan-card CTAs
 say `Acheter maintenant` in French. English and Spanish copy and day grammar
 were updated too. Overdue invoice behavior after a trial is unchanged. Six
-PHP files passed lint; JS syntax and public logo/login/pricing URLs passed.
+PHP files passed lint; JS syntax, a focused status-poll/reload check, and
+public logo/login/pricing URLs passed.
 No tenant provisioning was triggered for QA, and visual QA of the new splash
 remains pending. Local source, hashes and rollback location:
 `C:\Users\EDITO\Downloads\costera suite\recovered-live\saas-onboarding-ui\HANDOFF.md`.
