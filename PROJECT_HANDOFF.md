@@ -515,3 +515,15 @@ The payment route and billing logic are unchanged. PHP lint passed. The
 authenticated Stunart dashboard still needs a visual recheck. Source, backup
 and hash are recorded in
 `C:\Users\EDITO\Downloads\costera suite\recovered-live\invoice-alert-copy-20261101\HANDOFF.md`.
+
+## Tenant deployment email (1 November 2026)
+
+The live Perfex SaaS customer email sent after a tenant is deployed now matches
+the branded verification and welcome emails. It has distinct administrator and
+client-portal buttons and fallback URLs, with French, English and Spanish copy.
+The existing merge fields and provisioning flow are unchanged. PHP lint and a
+post-update database check passed for all three active templates. The original
+rows are backed up under `/root/costera-backups/2026-11-01-tenant-deployment-email/`.
+No real email was sent, so inbox rendering and delivery remain unverified.
+Local implementation and checks:
+`C:\Users\EDITO\Downloads\costera suite\recovered-live\tenant-deployment-email\HANDOFF.md`.
