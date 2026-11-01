@@ -506,3 +506,12 @@ six stored mail templates were checked for their logo and action link.
 Authenticated email delivery, a fresh verification click and a purchase remain
 untested. Backups and exact files are described in
 `C:\Users\EDITO\Downloads\costera suite\recovered-live\verification-welcome-trial\HANDOFF.md`.
+
+## French SaaS invoice alert (1 November 2026)
+
+The live Perfex French overdue-invoice message now reads `Votre Facture est en
+Attente de Paiement !`; its existing payment link reads `Payer la facture`.
+The payment route and billing logic are unchanged. PHP lint passed. The
+authenticated Stunart dashboard still needs a visual recheck. Source, backup
+and hash are recorded in
+`C:\Users\EDITO\Downloads\costera suite\recovered-live\invoice-alert-copy-20261101\HANDOFF.md`.
