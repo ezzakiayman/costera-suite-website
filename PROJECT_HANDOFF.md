@@ -540,3 +540,16 @@ and live browser checks of monthly and annual buttons passed. No signup or
 purchase was performed, so the full post-verification selection remains
 unverified. Local source, hashes, rollback copies and screenshot:
 `C:\Users\EDITO\Downloads\costera suite\recovered-live\pricing-registration-flow\HANDOFF.md`.
+
+## SaaS onboarding UI and trial copy (1 November 2026)
+
+The live Perfex SaaS provisioning splash now presents one branded setup card
+and an indeterminate progress bar, hiding technical deployment steps while
+retaining status polling and completion reload. Active trial notices show the
+package and remaining days without invoice or due-date text; plan-card CTAs
+say `Acheter maintenant` in French. English and Spanish copy and day grammar
+were updated too. Overdue invoice behavior after a trial is unchanged. Six
+PHP files passed lint; JS syntax and public logo/login/pricing URLs passed.
+No tenant provisioning was triggered for QA, and visual QA of the new splash
+remains pending. Local source, hashes and rollback location:
+`C:\Users\EDITO\Downloads\costera suite\recovered-live\saas-onboarding-ui\HANDOFF.md`.
