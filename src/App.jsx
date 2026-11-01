@@ -15,8 +15,8 @@ import { ASSET_BASE as ASSET } from './assetPath';
 
 const DEMO_URL = '/request-demo';
 const LOGIN_URL = 'https://costerasuite.com/login';
-const REGISTER_URL = 'https://costerasuite.com/authentication/register';
-const planRegistrationUrl = (slug) => `${REGISTER_URL}?ps_plan=${encodeURIComponent(slug)}`;
+const BILLING_URL = 'https://costerasuite.com/clients/?subscription';
+const planSubscriptionUrl = (slug) => `${BILLING_URL}&costera_plan=${encodeURIComponent(slug)}`;
 const RasSimulatorPage = lazy(() => import('./RasSimulatorPage'));
 
 class SimulatorErrorBoundary extends Component {
@@ -265,13 +265,13 @@ function PricingPage() {
     </section>
     <section className="product-proof" aria-label="Costera en action"><div className="container proof-layout"><figure className="dashboard-showcase"><img src={`${ASSET}costera-dashboard-mad.png`} width="1672" height="941" alt="Dashboard Costera Suite présentant le chiffre d’affaires, le pipeline, les devis et les activités récentes" /></figure><blockquote className="pricing-testimonial"><img src={`${ASSET}quote_testimonial.svg`} alt="" aria-hidden="true" /><p>Une solution claire, complète et évolutive pour accompagner notre croissance.</p><footer><strong>Yassine El Alaoui</strong><span>Directeur Général, Atlas Industrie</span></footer></blockquote></div></section>
     <section className="pricing-benefits" aria-label="Informations complémentaires"><div className="container benefits-strip"><Benefit icon="user_plus.svg" title="3 utilisateurs" text="inclus dans chaque formule" /><Benefit icon="gear_setup.svg" title="Mensuel ou annuel" text="2 mois offerts en annuel" /><Benefit icon="gift_trial.svg" title="Essai gratuit 7 jours" text="selon le pack choisi" /></div></section>
-    <section className="pricing-final"><div className="container final-panel"><div><span className="eyebrow">PRÊT À VOUS LANCER ?</span><h2>Commencez simplement. Évoluez avec Costera.</h2><p>Lancez votre gestion commerciale dès maintenant et activez progressivement d’autres capacités Costera selon l’évolution de votre entreprise.</p></div><div className="final-actions"><div><a className="button button-primary" href={planRegistrationUrl(planData[0].slugs.monthly)}>Essayer 7 jours <span aria-hidden="true">→</span></a><Link className="button button-outline" to="/request-demo?solution=sales-cloud">Demander une démo</Link></div><strong>Costera — <span>Grow Smarter. Operate Better.</span></strong></div></div></section>
+    <section className="pricing-final"><div className="container final-panel"><div><span className="eyebrow">PRÊT À VOUS LANCER ?</span><h2>Commencez simplement. Évoluez avec Costera.</h2><p>Lancez votre gestion commerciale dès maintenant et activez progressivement d’autres capacités Costera selon l’évolution de votre entreprise.</p></div><div className="final-actions"><div><a className="button button-primary" href={planSubscriptionUrl(planData[0].slugs.monthly)}>Essayer 7 jours <span aria-hidden="true">→</span></a><Link className="button button-outline" to="/request-demo?solution=sales-cloud">Demander une démo</Link></div><strong>Costera — <span>Grow Smarter. Operate Better.</span></strong></div></div></section>
   </main>;
 }
 
 function PricingCard({ plan, billing }) {
   const actionClass = `button ${plan.featured ? 'button-primary' : 'button-outline'} plan-action`;
-  return <article className={`pricing-card${plan.featured ? ' pricing-card-featured' : ''}`} aria-labelledby={`${plan.id}-title`}>{plan.featured && <span className="popular-badge">Le plus populaire</span>}<div className="plan-heading"><h2 id={`${plan.id}-title`}>{plan.title}</h2><p>{plan.subtitle}</p></div><div className="plan-price"><strong>{plan[billing]}</strong><span className="currency">MAD</span><small>HT / <span className="price-period">{billing === 'annual' ? 'an' : 'mois'}</span></small></div><p className="plan-users"><img src={`${ASSET}user_plus.svg`} alt="" />{plan.users}</p><ul className="plan-features">{plan.features.map((feature, index) => <li key={feature}>{index === 0 && plan.id !== 'essential' ? <strong>{feature}</strong> : feature}</li>)}</ul><a className={actionClass} href={planRegistrationUrl(plan.slugs[billing])}>{plan.action}</a></article>;
+  return <article className={`pricing-card${plan.featured ? ' pricing-card-featured' : ''}`} aria-labelledby={`${plan.id}-title`}>{plan.featured && <span className="popular-badge">Le plus populaire</span>}<div className="plan-heading"><h2 id={`${plan.id}-title`}>{plan.title}</h2><p>{plan.subtitle}</p></div><div className="plan-price"><strong>{plan[billing]}</strong><span className="currency">MAD</span><small>HT / <span className="price-period">{billing === 'annual' ? 'an' : 'mois'}</span></small></div><p className="plan-users"><img src={`${ASSET}user_plus.svg`} alt="" />{plan.users}</p><ul className="plan-features">{plan.features.map((feature, index) => <li key={feature}>{index === 0 && plan.id !== 'essential' ? <strong>{feature}</strong> : feature}</li>)}</ul><a className={actionClass} href={planSubscriptionUrl(plan.slugs[billing])}>{plan.action}</a></article>;
 }
 
 function Benefit({ icon, title, text }) {
