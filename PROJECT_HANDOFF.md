@@ -554,3 +554,20 @@ public logo/login/pricing URLs passed.
 No tenant provisioning was triggered for QA, and visual QA of the new splash
 remains pending. Local source, hashes and rollback location:
 `C:\Users\EDITO\Downloads\costera suite\recovered-live\saas-onboarding-ui\HANDOFF.md`.
+
+## Tenant administrator setup guide (4 November 2026)
+
+The live Perfex tenant admin dashboard now shows a collapsible five-step
+setup guide above its widgets, restricted to tenant administrators. Progress
+reads tenant logo/address, collaborator, customer and first estimate/invoice
+records; links open real Perfex setup screens. French, English and Spanish
+copy is included. The tenant email hook uses an uploaded tenant logo when its
+file exists, with company-name fallback. No tenant logo file was present on
+4 November, so a real delivered email with a logo has not been verified.
+PHP lint and render checks passed; authenticated dashboard visual/click QA is
+pending. Rollback and hashes: `C:\Users\EDITO\Downloads\costera suite\recovered-live\tenant-admin-onboarding\HANDOFF.md`.
+
+The earlier 1 November tenant client fix removed parent SaaS subscription and
+tenant management controls from tenant customer accounts and repaired the
+tenant forgot-password layout and broken logo reference. Public reset pages
+returned 200; authenticated access and delivered email remain untested.
