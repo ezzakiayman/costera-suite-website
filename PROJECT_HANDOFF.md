@@ -564,7 +564,7 @@ records; links open real Perfex setup screens. French, English and Spanish
 copy is included. The tenant email hook uses an uploaded tenant logo when its
 file exists, with company-name fallback. No tenant logo file was present on
 4 November, so a real delivered email with a logo has not been verified.
-PHP lint and render checks passed; authenticated dashboard visual/click QA is
+PHP lint, render checks and 1440/390 px static previews without overflow passed; authenticated dashboard visual/click QA is
 pending. Rollback and hashes: `C:\Users\EDITO\Downloads\costera suite\recovered-live\tenant-admin-onboarding\HANDOFF.md`.
 
 The earlier 1 November tenant client fix removed parent SaaS subscription and
