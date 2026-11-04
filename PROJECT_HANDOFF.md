@@ -584,3 +584,7 @@ click QA remains pending. Source staging, hashes and rollback:
 # Perfex tenant access and billing (4 November 2026)
 
 The live Perfex tenant customer login no longer offers self-registration, and tenant `/authentication/register` redirects to login. The main Costera SaaS signup remains available. After a tenant has a selected package, its billing menu and old subscription bookmarks lead to `admin/billing/my_account?redirect=clients`; tenants without a package can still choose one. The added outer billing card and tinted summary surface were removed. Public route checks passed for Total Energie and Biia; authenticated billing and purchase QA is pending. See `C:\Users\EDITO\Downloads\costera suite\recovered-live\tenant-access-billing-correction\HANDOFF.md`.
+
+# Perfex SaaS invoice offline payment (4 November 2026)
+
+The live parent Costera SaaS invoice page offers bank transfer and cheque with receipt upload and a pending-review message. The payee details come from a user-provided private PDF and are excluded from this repository. The feature is restricted to the logged-in owner of an unpaid SaaS package invoice; submitting proof opens a staff review ticket and does not record payment. PHP lint, eligibility checks and public route checks passed. Authenticated submission QA remains pending. See `C:\Users\EDITO\Downloads\costera suite\recovered-live\invoice-offline-proof-20261104\HANDOFF.md`.
