@@ -581,3 +581,6 @@ and wider totals card. PHP lint, focused render checks, CSS delivery and
 desktop/mobile static previews passed. Authenticated tenant billing visual and
 click QA remains pending. Source staging, hashes and rollback:
 `C:\Users\EDITO\Downloads\costera suite\recovered-live\tenant-billing-guide\HANDOFF.md`.
+# Perfex tenant access and billing (4 November 2026)
+
+The live Perfex tenant customer login no longer offers self-registration, and tenant `/authentication/register` redirects to login. The main Costera SaaS signup remains available. After a tenant has a selected package, its billing menu and old subscription bookmarks lead to `admin/billing/my_account?redirect=clients`; tenants without a package can still choose one. The added outer billing card and tinted summary surface were removed. Public route checks passed for Total Energie and Biia; authenticated billing and purchase QA is pending. See `C:\Users\EDITO\Downloads\costera suite\recovered-live\tenant-access-billing-correction\HANDOFF.md`.
