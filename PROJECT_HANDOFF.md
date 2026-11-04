@@ -571,3 +571,13 @@ The earlier 1 November tenant client fix removed parent SaaS subscription and
 tenant management controls from tenant customer accounts and repaired the
 tenant forgot-password layout and broken logo reference. Public reset pages
 returned 200; authenticated access and delivered email remain untested.
+
+## Tenant billing guide and UI (4 November 2026)
+
+The live Perfex tenant admin billing bridge now shows a compact version of the
+setup guide on subscription/account billing routes. The embedded billing view
+has a responsive frame; the parent customer billing detail has a clearer table
+and wider totals card. PHP lint, focused render checks, CSS delivery and
+desktop/mobile static previews passed. Authenticated tenant billing visual and
+click QA remains pending. Source staging, hashes and rollback:
+`C:\Users\EDITO\Downloads\costera suite\recovered-live\tenant-billing-guide\HANDOFF.md`.
