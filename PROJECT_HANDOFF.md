@@ -598,3 +598,7 @@ The invoice proof form also needed a hidden submission field: its JavaScript dis
 ## SaaS invoice payment selector (4 November 2026)
 
 The live parent Perfex SaaS invoice proof form now shows a single required payment-method dropdown instead of separate bank-transfer and cheque radio controls. Selecting a method reveals the matching existing instructions. Staging/live PHP lint passed; view hash ca6808c3f969761cc2834419bb6795f375889f02dc2e71217276cd08d7f14a6d. Authenticated visual and proof-email delivery checks remain pending.
+
+## SaaS invoice proof resend (4 November 2026)
+
+The invoice header action now reads Choisir un mode de paiement. An invoice with a pending proof offers Renvoyer un justificatif; expanding it allows a new validated upload. The admin email identifies the new proof as a replacement. A production submission created one pending marker, confirming Perfex mailer acceptance, but inbox/attachment delivery and the resend path have not been verified end to end. Payment is still recorded manually after verification. PHP lint passed; live view hash 974fb11a71ee4988c4aeb068f066473968dfff314d0c9a19a275bebc15eb64f2 and helper hash 7c74ac8383e4cd60f3a7f5fed8458a812e2e63df85df560ce927da14789aa66e.
