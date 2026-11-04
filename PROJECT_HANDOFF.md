@@ -588,3 +588,7 @@ The live Perfex tenant customer login no longer offers self-registration, and te
 # Perfex SaaS invoice offline payment (4 November 2026)
 
 The live parent Costera SaaS invoice page offers bank transfer and cheque with receipt upload and a pending-review message. The payee details come from a user-provided private PDF and are excluded from this repository. The feature is restricted to the logged-in owner of an unpaid SaaS package invoice; submitting proof opens a staff review ticket and does not record payment. PHP lint, eligibility checks and public route checks passed. Authenticated submission QA remains pending. See `C:\Users\EDITO\Downloads\costera suite\recovered-live\invoice-offline-proof-20261104\HANDOFF.md`.
+
+## Offline payment proof correction (4 November 2026)
+
+The earlier support-ticket submission path failed in production. The live Perfex SaaS invoice helper now sends the validated proof as an email attachment to Costera's admin address using the existing Perfex mail settings. The customer sees feedback beside the form and is returned to the invoice rather than a blank frame. Staff must still verify the payment manually; the invoice is not marked paid. PHP lint passed and the deployed helper hash is 807137d2dbebab1f54924a0b7597b02137de02cd1f4d5ec3735ab6639356ed13. There has been no post-switch proof submission, so end-to-end mail delivery and attachment receipt are pending. Private bank details are excluded from this repository. See the local invoice-offline-proof-20261104 handoff for the full sequence.
