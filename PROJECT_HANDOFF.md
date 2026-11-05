@@ -602,3 +602,7 @@ The live parent Perfex SaaS invoice proof form now shows a single required payme
 ## SaaS invoice proof resend (4 November 2026)
 
 The invoice header action now reads Choisir un mode de paiement. An invoice with a pending proof offers Renvoyer un justificatif; expanding it allows a new validated upload. The admin email identifies the new proof as a replacement. A production submission created one pending marker, confirming Perfex mailer acceptance, but inbox/attachment delivery and the resend path have not been verified end to end. Payment is still recorded manually after verification. PHP lint passed; live view hash 974fb11a71ee4988c4aeb068f066473968dfff314d0c9a19a275bebc15eb64f2 and helper hash 7c74ac8383e4cd60f3a7f5fed8458a812e2e63df85df560ce927da14789aa66e.
+
+## Main Perfex admin Settings drawer (5 November 2026)
+
+The live Perfex branding CSS was adjusted so the sidebar Paramètres drawer stays above the fixed sidebar and within the viewport. Authenticated main-admin browser QA confirmed opening, closing and reopening the drawer. This is a Perfex application change, not a marketing-site source change. The live CSS hash is `4d96b3e2825c47291815bcc69ffb08c8b0db07fc425a3557e8468644557060da`; root-only backup and rollback notes are in `C:\Users\EDITO\Downloads\costera suite\recovered-live\main-admin-settings-20261105\HANDOFF.md`. Tenant admin visual QA is pending.
