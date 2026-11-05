@@ -606,3 +606,7 @@ The invoice header action now reads Choisir un mode de paiement. An invoice with
 ## Main Perfex admin Settings drawer (5 November 2026)
 
 The live Perfex branding CSS was adjusted so the sidebar Paramètres drawer stays above the fixed sidebar and within the viewport. Authenticated main-admin browser QA confirmed opening, closing and reopening the drawer. This is a Perfex application change, not a marketing-site source change. The live CSS hash is `4d96b3e2825c47291815bcc69ffb08c8b0db07fc425a3557e8468644557060da`; root-only backup and rollback notes are in `C:\Users\EDITO\Downloads\costera suite\recovered-live\main-admin-settings-20261105\HANDOFF.md`. Tenant admin visual QA is pending.
+
+## Main Perfex staff removal check (5 November 2026)
+
+After the user confirmed deletion of one staff member and transfer to the remaining administrator, the Perfex browser session showed the target account already absent. A full reload showed one remaining staff member. The agent did not issue the final delete click after resuming, and transfer of every assigned record was not independently audited. This was a CRM operation, not a marketing-site code change. Personal account details are excluded here. Local record: `C:\Users\EDITO\Downloads\costera suite\recovered-live\staff-removal-20261105\HANDOFF.md`.
