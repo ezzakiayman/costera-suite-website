@@ -610,3 +610,7 @@ The live Perfex branding CSS was adjusted so the sidebar Paramètres drawer stay
 ## Main Perfex staff removal check (5 November 2026)
 
 After the user confirmed deletion of one staff member and transfer to the remaining administrator, the Perfex browser session showed the target account already absent. A full reload showed one remaining staff member. The agent did not issue the final delete click after resuming, and transfer of every assigned record was not independently audited. This was a CRM operation, not a marketing-site code change. Personal account details are excluded here. Local record: `C:\Users\EDITO\Downloads\costera suite\recovered-live\staff-removal-20261105\HANDOFF.md`.
+
+## Perfex registration spam guard (20 November 2026)
+
+Repeated signup POSTs caused verification and staff notification emails. A scoped guard was installed in the live Perfex `Authentication.php` registration handler. It temporarily blocks the observed source subnet and limits other registration attempts per IP and IPv4 subnet; signup GET and login remain available. Staging and live PHP lint, isolated guard tests, and public signup/login GET checks passed. A postdeployment HTTP 429 from a real attacker request had not yet been observed. No marketing-site code or customer records changed. The live controller hash is `f650d5ed0e636ebb44b0b37a8aa49154ccfec35dd7f2e90a7822bf2de306bd4b`; root-only backup and detailed test notes are in `C:\Users\EDITO\Downloads\costera suite\recovered-live\registration-spam-20261120\HANDOFF.md`.
