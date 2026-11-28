@@ -1,6 +1,6 @@
 import { Component, lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { ProductPage, ResourceArticlePage } from './SuitePages';
+import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { ProductPage, resourceArticles, ResourceArticlePage } from './SuitePages';
 import CosteraSuitePage from './CosteraSuitePage';
 import GrowthCloudReferencePage from './GrowthCloudReferencePage';
 import SalesCloudReferencePage from './SalesCloudReferencePage';
@@ -58,8 +58,8 @@ const planData = [
 function ScrollManager() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
-    const titles = { '/pricing': 'Tarifs Costera', '/costera-suite': 'Costera Suite', '/platform': 'Costera Suite', '/solutions': 'Costera Suite', '/solutions/growth-cloud': 'Growth Cloud', '/solutions/sales-cloud': 'Sales Cloud', '/solutions/revenue-performance': 'Revenue Performance Cloud', '/costera-intelligence': 'Costera Intelligence', '/industries': 'Industries Costera', '/resources': 'Ressources Costera', '/resources/tools': 'Outils gratuits', '/resources/tools/simulateur-ras': 'Simulateur RAS TVA et IS', '/contact': 'Contact Costera', '/request-demo': 'Demander une démo Costera' };
-    document.title = `${titles[pathname] || (pathname.startsWith('/resources/') ? 'Guide Costera' : 'Costera')} - Costera Suite`;
+    const titles = { '/pricing': 'Tarifs Costera', '/costera-suite': 'Plateforme', '/platform': 'Plateforme', '/solutions': 'Solutions', '/solutions/growth-cloud': 'Growth Cloud', '/solutions/sales-cloud': 'Sales Cloud', '/solutions/revenue-performance': 'Revenue Performance Cloud', '/costera-intelligence': 'Costera Intelligence', '/industries': 'Industries Costera', '/resources': 'Ressources Costera', '/resources/tools': 'Outils gratuits', '/resources/tools/simulateur-ras': 'Simulateur RAS TVA et IS', '/contact': 'Contact Costera', '/request-demo': 'Demander une démo Costera' };
+    document.title = `${titles[pathname.replace(/\/$/, '')] || (pathname.startsWith('/resources/') ? (resourceArticles.find(a => pathname === '/resources/' + a.slug)?.title || 'Ressources') : 'Gestion commerciale')} - Costera Suite`;
     document.body.classList.toggle('pricing-page', pathname === '/pricing');
     if (hash) requestAnimationFrame(() => document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView({ behavior: 'smooth' }));
     else window.scrollTo({ top: 0, behavior: 'instant' });
@@ -130,9 +130,9 @@ function Footer({ onTrial }) {
   return <footer className="site-footer"><div className="container footer-grid">
     <div className="footer-brand"><Link className="brand" to="/" aria-label="Costera, accueil"><span className="brand-logo"><img src={`${ASSET}brand-guide.png`} width="1672" height="941" alt="Costera Suite" /></span></Link><p>Une solution simple et puissante pour<br />centraliser, piloter et faire grandir votre<br />activité commerciale.</p><strong>Grow Smarter. Operate Better.</strong><small>© {new Date().getFullYear()} Costera. Tous droits réservés.</small></div>
     <div className="footer-column"><strong>Produit</strong><Link to="/costera-suite">Costera Suite</Link><Link to="/pricing">Tarifs</Link><Link to="/costera-intelligence">Costera Intelligence</Link></div>
-    <div className="footer-column"><strong>Ressources</strong><Link to="/resources">Centre de ressources</Link><Link to="/resources/tools">Outils gratuits</Link><Link to="/industries">Industries</Link><Link to="/solutions/sales-cloud">Sales Cloud</Link></div>
+    <div className="footer-column"><strong>Ressources</strong><Link to="/resources">Centre de ressources</Link><Link to="/resources/tools">Outils gratuits</Link><Link to="/resources?topic=Guide#resources-articles">Guides pratiques</Link></div>
     <div className="footer-column"><strong>Entreprise</strong><Link to="/industries">Industries</Link><Link to="/solutions/revenue-performance">Revenue Performance</Link><Link to="/contact">Contact</Link><Link to="/request-demo">Demander une démo</Link></div>
-    <div className="footer-cta"><h3>Prêt à simplifier votre<br />gestion commerciale ?</h3><button className="button button-primary button-small" onClick={onTrial}>Essayer gratuitement 7 jours <span aria-hidden="true">→</span></button><Link className="footer-demo" to={DEMO_URL}>Demander une démo</Link><p>Sans engagement</p></div>
+    <div className="footer-cta"><h3>Prêt à simplifier votre<br />gestion commerciale ?</h3><button className="button button-primary button-small" onClick={onTrial}>Essayer gratuitement <span aria-hidden="true">→</span></button><Link className="footer-demo" to={DEMO_URL}>Demander une démo</Link><p>Sans engagement</p></div>
   </div></footer>;
 }
 
@@ -157,7 +157,7 @@ function App() {
       <Route path="/industries" element={<IndustriesReferencePage />} />
       <Route path="/resources" element={<ResourcesReferencePage />} />
       <Route path="/resources/tools" element={<FreeToolsPage />} />
-      <Route path="/resources/tools/simulateur-ras" element={<SimulatorErrorBoundary><Suspense fallback={<main id="main" className="container" aria-busy="true" style={{ minHeight: 500 }} />}><RasSimulatorPage /></Suspense></SimulatorErrorBoundary>} />
+      <Route path="/resources/tools/simulateur-ras" element={<SimulatorErrorBoundary><Suspense fallback={<main id="main" className="container" aria-busy="true" style={{ minHeight: 300, paddingBlock: 64 }}><p role="status">Chargement du simulateur…</p></main>}><RasSimulatorPage /></Suspense></SimulatorErrorBoundary>} />
       <Route path="/resources/:slug" element={<ResourceArticlePage />} />
       <Route path="/contact" element={<ContactReferencePage />} />
       <Route path="/request-demo" element={<RequestDemoPage />} />
@@ -205,7 +205,7 @@ function HomePage({ onTrial, onFeature }) {
 
   return <main id="main">
     <section className="hero" aria-labelledby="hero-title"><div className="container hero-inner">
-      <div className="hero-content"><div className="product-badge"><span>GESTION COMMERCIALE</span><span>Powered by Costera Sales Cloud</span></div><h1 id="hero-title">Pilotez toute votre<br className="desktop-break" /> activité commerciale<br className="desktop-break" /> depuis <em>une seule<br className="desktop-break" /> plateforme.</em></h1><p className="hero-description">Centralisez vos prospects, clients, opportunités, devis, factures et performances commerciales avec une solution simple, moderne et conçue pour les entreprises en croissance.</p><div className="hero-actions"><button className="button button-primary" onClick={onTrial}>Essayer gratuitement 7 jours <span aria-hidden="true">→</span></button><Link className="button button-outline" to="/request-demo?solution=sales-cloud">Demander une démo</Link></div><ul className="reassurance" aria-label="Les avantages de votre essai"><li><span className="check" aria-hidden="true">✓</span> Sans engagement</li><li><span className="check" aria-hidden="true">✓</span> Configuration rapide</li><li><span className="check" aria-hidden="true">✓</span> Accompagnement inclus</li></ul></div>
+      <div className="hero-content"><div className="product-badge"><span>GESTION COMMERCIALE</span><span>Powered by Costera Sales Cloud</span></div><h1 id="hero-title">Pilotez toute votre<br className="desktop-break" /> activité commerciale<br className="desktop-break" /> depuis <em>une seule<br className="desktop-break" /> plateforme.</em></h1><p className="hero-description">Centralisez vos prospects, clients, opportunités, devis, factures et performances commerciales avec une solution simple, moderne et conçue pour les entreprises en croissance.</p><div className="hero-actions"><button className="button button-primary" onClick={onTrial}>Essayer gratuitement <span aria-hidden="true">→</span></button><Link className="button button-outline" to="/request-demo?solution=sales-cloud">Demander une démo</Link></div><ul className="reassurance" aria-label="Les avantages de votre essai"><li><span className="check" aria-hidden="true">✓</span> Sans engagement</li><li><span className="check" aria-hidden="true">✓</span> Configuration rapide</li><li><span className="check" aria-hidden="true">✓</span> Accompagnement inclus</li></ul></div>
       <div className="hero-visual"><img className="dashboard-image" src={`${ASSET}hero-dashboard.png`} width="1672" height="941" alt="Aperçu du tableau de bord Costera" fetchPriority="high" /><div className="handwritten hero-note" aria-hidden="true">Une vision claire.<br />De meilleures décisions.<svg viewBox="0 0 100 110"><path d="M72 5C78 39 57 64 28 85M28 85l5-24M28 85l26-4" /></svg></div></div>
     </div><div className="container trust-strip"><p>Ils nous font confiance</p><div className="customer-logos" role="region" aria-label="Références clients, carrousel animé" tabIndex="0"><div className="customer-logo-track"><CustomerLogoGroup /><CustomerLogoGroup duplicate /></div></div></div></section>
 
@@ -253,24 +253,40 @@ function Result({ value, label, tone = 'blue' }) {
 }
 
 function PricingPage() {
-  const [billing, setBilling] = useState('monthly');
+  const [params, setParams] = useSearchParams();
+  const billing = params.get('periode') === 'annuel' ? 'annual' : 'monthly';
+  function setBilling(value) {
+    const next = new URLSearchParams(params);
+    if (value === 'annual') next.set('periode', 'annuel'); else next.delete('periode');
+    setParams(next, {replace: true, preventScrollReset: true});
+  }
+  const [catalog, setCatalog] = useState(null);
+  const [catalogError, setCatalogError] = useState(false);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/costera_intake/catalog', {signal: controller.signal})
+      .then(response => { if (!response.ok) throw new Error(); return response.json(); })
+      .then(setCatalog)
+      .catch(() => { if (!controller.signal.aborted) setCatalogError(true); });
+    return () => controller.abort();
+  }, []);
   useEffect(() => {
     document.body.classList.add('pricing-page');
     return () => document.body.classList.remove('pricing-page');
   }, []);
   return <main id="main">
     <section className="pricing-hero" aria-labelledby="pricing-title"><div className="container pricing-intro"><span className="eyebrow">PRICING</span><h1 id="pricing-title">Une offre simple pour digitaliser<br className="desktop-break" /> votre gestion commerciale</h1><p>Choisissez le pack Costera qui correspond à la taille et à la maturité de votre équipe commerciale.</p><div className="billing-control"><div className="billing-toggle" role="group" aria-label="Période de facturation"><button type="button" data-billing="monthly" className={`billing-option${billing === 'monthly' ? ' is-active' : ''}`} aria-pressed={billing === 'monthly'} onClick={() => setBilling('monthly')}>Mensuel</button><button type="button" data-billing="annual" className={`billing-option${billing === 'annual' ? ' is-active' : ''}`} aria-pressed={billing === 'annual'} onClick={() => setBilling('annual')}>Annuel <span>(2 mois offerts)</span></button></div><span className="billing-saving">Économisez 17%</span></div></div>
-      <div className="container pricing-grid" id="offres">{planData.map((plan) => <PricingCard key={plan.id} plan={plan} billing={billing} />)}</div>
+      <div className="container pricing-grid" id="offres" tabIndex="-1">{catalog ? planData.filter(plan => catalog[plan.slugs[billing]]).map(plan => <PricingCard key={plan.id} plan={plan} billing={billing} offer={catalog[plan.slugs[billing]]} />) : <p role="status">{catalogError ? <>Les tarifs sont momentanément indisponibles. <Link to="/contact">Contacter Costera</Link></> : 'Chargement des offres…'}</p>}</div>
     </section>
     <section className="product-proof" aria-label="Costera en action"><div className="container proof-layout"><figure className="dashboard-showcase"><img src={`${ASSET}costera-dashboard-mad.png`} width="1672" height="941" alt="Dashboard Costera Suite présentant le chiffre d’affaires, le pipeline, les devis et les activités récentes" /></figure><blockquote className="pricing-testimonial"><img src={`${ASSET}quote_testimonial.svg`} alt="" aria-hidden="true" /><p>Une solution claire, complète et évolutive pour accompagner notre croissance.</p><footer><strong>Yassine El Alaoui</strong><span>Directeur Général, Atlas Industrie</span></footer></blockquote></div></section>
-    <section className="pricing-benefits" aria-label="Informations complémentaires"><div className="container benefits-strip"><Benefit icon="user_plus.svg" title="3 utilisateurs" text="inclus dans chaque formule" /><Benefit icon="gear_setup.svg" title="Mensuel ou annuel" text="2 mois offerts en annuel" /><Benefit icon="gift_trial.svg" title="Essai gratuit 7 jours" text="selon le pack choisi" /></div></section>
-    <section className="pricing-final"><div className="container final-panel"><div><span className="eyebrow">PRÊT À VOUS LANCER ?</span><h2>Commencez simplement. Évoluez avec Costera.</h2><p>Lancez votre gestion commerciale dès maintenant et activez progressivement d’autres capacités Costera selon l’évolution de votre entreprise.</p></div><div className="final-actions"><div><a className="button button-primary" href={planSubscriptionUrl(planData[0].slugs.monthly)}>Essayer 7 jours <span aria-hidden="true">→</span></a><Link className="button button-outline" to="/request-demo?solution=sales-cloud">Demander une démo</Link></div><strong>Costera — <span>Grow Smarter. Operate Better.</span></strong></div></div></section>
+    <section className="pricing-benefits" aria-label="Informations complémentaires"><div className="container benefits-strip"><Benefit icon="user_plus.svg" title="3 utilisateurs" text="inclus dans chaque formule" /><Benefit icon="gear_setup.svg" title="Mensuel ou annuel" text="2 mois offerts en annuel" /><Benefit icon="gift_trial.svg" title="Durée de l’essai" text="selon le pack choisi" /></div></section>
+    <section className="pricing-final"><div className="container final-panel"><div><span className="eyebrow">PRÊT À VOUS LANCER ?</span><h2>Commencez simplement. Évoluez avec Costera.</h2><p>Lancez votre gestion commerciale dès maintenant et activez progressivement d’autres capacités Costera selon l’évolution de votre entreprise.</p></div><div className="final-actions"><div><a className="button button-primary" href="#offres">Choisir mon offre <span aria-hidden="true">→</span></a><Link className="button button-outline" to="/request-demo?solution=sales-cloud">Demander une démo</Link></div><strong>Costera — <span>Grow Smarter. Operate Better.</span></strong></div></div></section>
   </main>;
 }
 
-function PricingCard({ plan, billing }) {
+function PricingCard({ plan, billing, offer }) {
   const actionClass = `button ${plan.featured ? 'button-primary' : 'button-outline'} plan-action`;
-  return <article className={`pricing-card${plan.featured ? ' pricing-card-featured' : ''}`} aria-labelledby={`${plan.id}-title`}>{plan.featured && <span className="popular-badge">Le plus populaire</span>}<div className="plan-heading"><h2 id={`${plan.id}-title`}>{plan.title}</h2><p>{plan.subtitle}</p></div><div className="plan-price"><strong>{plan[billing]}</strong><span className="currency">MAD</span><small>HT / <span className="price-period">{billing === 'annual' ? 'an' : 'mois'}</span></small></div><p className="plan-users"><img src={`${ASSET}user_plus.svg`} alt="" />{plan.users}</p><ul className="plan-features">{plan.features.map((feature, index) => <li key={feature}>{index === 0 && plan.id !== 'essential' ? <strong>{feature}</strong> : feature}</li>)}</ul><a className={actionClass} href={planSubscriptionUrl(plan.slugs[billing])}>{plan.action}</a></article>;
+  return <article className={`pricing-card${plan.featured ? ' pricing-card-featured' : ''}`} aria-labelledby={`${plan.id}-title`}>{plan.featured && <span className="popular-badge">Le plus populaire</span>}<div className="plan-heading"><h2 id={`${plan.id}-title`}>{plan.title}</h2><p>{plan.subtitle}</p></div><div className="plan-price"><strong>{new Intl.NumberFormat('fr-MA').format(offer.price)}</strong><span className="currency">MAD</span><small>HT / <span className="price-period">{billing === 'annual' ? 'an' : 'mois'}</span></small></div><p className="plan-users"><img src={`${ASSET}user_plus.svg`} alt="" />{plan.users} · {offer.trialDays > 0 ? `Essai de ${offer.trialDays} jour${offer.trialDays > 1 ? 's' : ''}` : 'Sans essai'}</p><ul className="plan-features">{plan.features.map((feature, index) => <li key={feature}>{index === 0 && plan.id !== 'essential' ? <strong>{feature}</strong> : feature}</li>)}</ul><a className={actionClass} href={planSubscriptionUrl(plan.slugs[billing])}>{plan.action}</a></article>;
 }
 
 function Benefit({ icon, title, text }) {

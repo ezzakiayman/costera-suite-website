@@ -51,6 +51,6 @@ export default function RasSimulatorPage() {
 
   return <div className="ras-page">
     <div className="container ras-page-back"><Link to="/resources/tools"><ArrowLeft aria-hidden="true" /> Tous les outils gratuits</Link></div>
-    <div className="ras-simulator" ref={root} dangerouslySetInnerHTML={{ __html: html }} />
+    <div className="ras-simulator" ref={root} />
   </div>;
 }

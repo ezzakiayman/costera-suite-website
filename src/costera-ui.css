@@ -1,0 +1,19 @@
+:root {
+  --costera-ink: #181731;
+  --costera-muted: #53596d;
+  --costera-accent: #562bc1;
+  --costera-border: #dedcea;
+  --costera-error: #90332a;
+  --costera-space: 16px;
+  --costera-radius: 12px;
+}
+:where(.cs-inquiry, .pricing-card, .resources-ref, .cs-workspace, .costera-register-shell, .cs-proofs)
+:is(a, button, input, textarea, select, summary):focus-visible {
+  outline: 3px solid var(--costera-accent);
+  outline-offset: 2px;
+}
+.cs-proofs { color: var(--costera-ink); }
+.cs-proofs article { border-radius: var(--costera-radius); border-color: var(--costera-border); }
+.cs-proofs summary { color: var(--costera-accent); cursor: pointer; }
+.cs-proofs nav { display: flex; gap: var(--costera-space); }
+.cs-proofs button, .cs-proofs .btn { margin-block: 3px; }

@@ -5,6 +5,7 @@ import App from './App';
 import '../styles.css';
 import '../pricing.css';
 import './suite-pages.css';
+import './costera-ui.css';
 import './experience.css';
 import './recommendations.css';
 import './solutions-reference.css';

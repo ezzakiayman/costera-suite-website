@@ -23,3 +23,7 @@
 .ras-simulator{padding-bottom:42px}
 .free-tools-error{padding:70px 0 100px}.free-tools-error h1{font-size:28px}.free-tools-error pre{white-space:pre-wrap;color:#ad3030}
 @media(max-width:640px){.free-tools-intro{padding:42px 0 25px}.free-tools-list{padding-bottom:70px}.free-tool-card{gap:15px;padding:18px}.free-tool-icon{flex-basis:42px;height:42px}.free-tool-icon svg{width:23px;height:23px}.free-tool-copy h2{font-size:18px}.free-tool-action{display:none}}
+
+.ras-page .ras-simulator, .ras-page .ras-simulator main, .ras-page .ras-simulator fieldset { min-width: 0; max-width: 100%; }
+.ras-page .ras-simulator :is(input,select,textarea) { max-width: 100%; }
+@media (max-width: 800px) { .ras-page .ras-simulator .layout { grid-template-columns: minmax(0,1fr); } .ras-page .ras-simulator .panel { min-width: 0; overflow-wrap: anywhere; } .ras-page .ras-simulator .panel .step-nav { flex-wrap: wrap; } }
